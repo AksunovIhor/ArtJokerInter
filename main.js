@@ -247,12 +247,138 @@ dbm.getSumMatrixEllem;
 let arrMinMax = [4,3,4,5,12,3,5,6,71,2,3,4];
 function sumMinForMax(array, minNumber, maxNumber){
     let sum = 0;
-    for(let i = 0; i <= array.length; i++){
-        if(i == minNumber && i <= maxNumber){
+    for(let i = minNumber; i <= maxNumber; i++){
+        sum += array[i];
+    }
+    return sum;
+}
+sumMinForMax(arrMinMax, 4, 10);
+
+function sumMinForMaxMultipleThree(array, minNumber, maxNumber){
+    let sum = 0;
+    for(let i = minNumber; i <= maxNumber; i++){
+        if(array[i] % 3 == 0){
             sum += array[i];
-            console.log(sum);
         }
     }
     return sum;
 }
-sumMinForMax(arrMinMax, 3, 6);
+sumMinForMaxMultipleThree(arrMinMax, 4, 10);
+
+function sumMinForMaxMultipleThree(array, minNumber, maxNumber){
+    let sum = 0;
+    for(let i = minNumber; i <= maxNumber; i++){
+        if(array[i] > 0){
+            sum += array[i];
+        }
+    }
+    return sum;
+}
+sumMinForMaxMultipleThree(arrMinMax, 4, 10);
+
+//14) average arr and double arr
+let averArr = [1,2,3,4,5,6,7,8,9,10];
+function getArrAverage(array){
+    let average = 0;
+    let sum = 0;
+    for(let i = 0; i <= array.length-1; i++){
+        sum += array[i];
+        console.log(sum);
+    }
+    average = sum / array.length;
+    return average;
+}
+getArrAverage(averArr);
+
+function getEvenArrAverage(array){
+    let average = 0;
+    let sum = 0;
+    let counter = 0;
+    for(let i = 0; i <= array.length-1; i++){
+        if(array[i] % 2 == 0){
+            sum += array[i];
+            counter++;
+        }
+        console.log(sum);
+    }
+    average = sum / counter;
+    return average;
+}
+getEvenArrAverage(averArr);
+
+function getNotEvenArrAverage(array){
+    let average = 0;
+    let sum = 0;
+    let counter = 0;
+    for(let i = 0; i <= array.length-1; i++){
+        if(array[i] % 2 != 0){
+            sum += array[i];
+            counter++;
+        }
+        console.log(sum);
+    }
+    average = sum / counter;
+    return average;
+}
+getNotEvenArrAverage(averArr);
+
+function getDoubleArrAverage(stroke, collumn){
+    let average = 0;
+    let sum = 0;
+    let counter = 0;
+    let matrix = [];
+    for(let i = 0; i <= stroke-1; i++){
+        matrix[i] = [];
+        for(let j = 0; j <= collumn-1; j++){
+            matrix[i][j] = Math.floor(Math.random() * 10);
+            sum += matrix[i][j];
+            counter++;
+        }
+    }
+    console.log(matrix);
+    average = sum / counter;
+    return average;
+}
+getDoubleArrAverage(3,3);
+
+function getEvenDoubleArrAverage(stroke, collumn){
+    let average = 0;
+    let sum = 0;
+    let counter = 0;
+    let matrix = [];
+    for(let i = 0; i <= stroke-1; i++){
+        matrix[i] = [];
+        for(let j = 0; j <= collumn-1; j++){
+            matrix[i][j] = Math.floor(Math.random() * 10);
+            if(matrix[i][j] % 2 == 0){
+                sum += matrix[i][j];
+                counter++;
+            }
+        }
+    }
+    console.log(matrix);
+    average = sum / counter;
+    return average;
+}
+getEvenDoubleArrAverage(3,3);
+
+function getEvenDoubleArrAverage(stroke, collumn){
+    let average = 0;
+    let sum = 0;
+    let counter = 0;
+    let matrix = [];
+    for(let i = 0; i <= stroke-1; i++){
+        matrix[i] = [];
+        for(let j = 0; j <= collumn-1; j++){
+            matrix[i][j] = Math.floor(Math.random() * 10);
+            if(matrix[i][j] % 2 != 0){
+                sum += matrix[i][j];
+                counter++;
+            }
+        }
+    }
+    console.log(matrix);
+    average = sum / counter;
+    return average;
+}
+getEvenDoubleArrAverage(3,3);
