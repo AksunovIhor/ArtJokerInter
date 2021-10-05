@@ -382,3 +382,17 @@ function getEvenDoubleArrAverage(stroke, collumn){
     return average;
 }
 getEvenDoubleArrAverage(3,3);
+
+//15) transport matrix
+function matrixTransport(stroke, collumn){
+    let matrix = [];
+    for(let i = 0; i <= stroke-1; i++){
+        matrix[i] = [];
+        for(let j = 0; j <= collumn-1; j++){
+            matrix[i][j] = Math.floor(Math.random() * 10);
+            
+        }
+    }
+    console.log(matrix);
+}
+matrixTransport(3,3);
