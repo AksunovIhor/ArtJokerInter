@@ -1,6 +1,6 @@
 'use strict';
 
-//1) Anagramma
+//1) Анаграмма + 
 function isAnagramma(firstWord, secondWord) {
     if (firstWord.length !== secondWord.length) {
         return false;
@@ -26,50 +26,33 @@ function isAnagramma(firstWord, secondWord) {
             return false;
         };
     };
+
     return true;
-};
-//3) количество цифр в числе
+}
+
+//3) количество цифр в числе + 
 function numbersCount(number){
-    let numeral = 0;
     let counter = 0;
-    while(number){
+    let numeral = 0;
+    let baseNumber = 0;
+    while(number) {
         numeral = number % 10;
+        baseNumber = number;
         number = (number - numeral) / 10;
-        if(numeral == number){
-            counter++;
-        }
-        console.log(`${numeral} and ${counter}`);
+        counter++;
     }
+    return counter;
 }
 
-/*function getSumNumber(num) {
-        let sum = 0, tmp = 0;
-        while (num) {
-            tmp = num % 10;
-            num = (num - tmp) / 10;
-            sum += tmp;
-            console.log(num);
-        }
-        
-    }
-    alert(getSumNumber(2610));
-
-function sds(number){
-    let tmp = number % 10;
-    //number = (number - tmp) / 10;
-    console.log(tmp);
-}
-sds(123);*/
-numberCount(123);
-
-//4) уникальные слова в предложении
+//4) уникальные слова в предложении 
     let str = "kol lok lok fddc cdda asd adas adas";
     function unicWords(string){
         let counter = 0;
         let wordArray = string.split(" ");
-        for(let i = 0; i <= wordArray.length; i++){
+        console.log(wordArray);
+        for(let i = 0; i < wordArray.length; i++){
             let someWord = wordArray[i];
-            if(someWord != wordArray[i + 1]){
+            if(someWord !== wordArray[i]){
                 counter++;
             }
         }
@@ -95,24 +78,55 @@ function wordsCounter(string){
 }
 wordsCounter(someStr);
 
-//6) вывод чисел фибоначи
-function fibonacciNumbers(counter){
-    let firstNumber = 0;
-    let secondNumber = 1;
-    let summ = firstNumber + secondNumber;
-    counter--;
-    return summ + fibonacciNumbers(summ);
-}
-fibonacciNumbers(5);
+//6) вывод чисел фибоначи + 
+function showFibonacciNumbers(amountNumbers){
+    let fibNumbers = [0, 1];
 
-//7)площадь и периметр круга, треугольника, квадрата 
-let rectangle = {
-    width : 30,
-    height: 40,
-    
+    for(let i = 2; i < amountNumbers; i++){
+        let prevNumber = fibNumbers[i - 1];
+        let nextNumber = fibNumbers[i - 2];
+        fibNumbers.push(prevNumber + nextNumber);
+    }
+
+    return fibNumbers;
 }
 
-//8) факториал
+//7)площадь и периметр круга, треугольника, квадрата + 
+function Rectangle(width, height){
+    this.width = width;
+    this.height = height;
+}
+Rectangle.prototype.square = function(){
+    return this.width * this.height;
+}
+Rectangle.prototype.perimeter = function(){
+    return (this.width + this.height) * 2;
+}
+
+function Triangle(aSide, bSide, cSide){
+    this.aSide = aSide;
+    this.bSide = bSide;
+    this.cSide = cSide;
+}
+Triangle.prototype.square = function(){
+    let halfPerimeter = (this.aSide + this.bSide + this.cSide) / 2;
+    return Math.sqrt(halfPerimeter * (halfPerimeter - this.aSide) * (halfPerimeter - this.bSide) * (halfPerimeter - this.cSide));
+}
+Triangle.prototype.perimeter = function(){
+    return this.aSide + this.bSide + this.cSide;
+}
+
+function Circle(radius){
+    this.radius = radius;
+}
+Circle.prototype.square = function(){
+    return Math.PI * (this.radius * this.radius);
+}
+Circle.prototype.perimeter = function(){
+    return 2 * Math.PI * this.radius;
+}
+
+//8) факториал +
 function getFactorial(number){
     if(number == 0 || number == 1) {
         return number;
@@ -121,103 +135,104 @@ function getFactorial(number){
         return number * getFactorial(number - 1);
     }
 }
-getFactorial(5);
 
-//9) array element work
-class arrayElementsSumm{
-    constructor(array){
-        this.array = array
+//9) сумма элементов массива +
+function getArrayEllemSum(array){
+    let sum = 0;
+    for(let i  = 0; i < array.length; i++){
+        sum += array[i];
     }
-
-    set setArray(value){
-        this.array = value;
-    }
-
-    get getAllEllements(){
-        let summ = 0;
-        for(let i = 0; i <= this.array.length-1; i++){
-            summ += this.array[i];
-        }
-        return summ;
-    }
-    get getMultipleOfTwo(){
-        let summ = 0;
-        for(let i = 0; i <= this.array.length-1; i++){
-            if(this.array[i] % 2 == 0){
-                summ += this.array[i];
-            }
-        }
-        return summ;
-    }
-    get getPositiveAncounteble(){
-        let summ = 0;
-        for(let i = 0; i <= this.array.length; i++){
-            if(this.array[i] > 0 && this.array[i] % 2 != 0){
-                summ += this.array[i];
-            }
-        }
-        return summ;
-    }
+    return sum;
 }
-let someArr = [1,2,3,4,5,6,7,8,9,10];
-let someArr2 = [1,2,3,-4,-5,6,7,8,9,10];
-let aes = new arrayElementsSumm(someArr2);
-/*console.log(aes.getAllEllements);
-console.log(aes.getMultipleOfTwo);*/
-console.log(aes.getPositiveAncounteble);
 
-//10) count arr allem
-class arrayElementsCount{
-    constructor(array){
-        this.array = array;
-    }
-    set setArray(value){
-        this.array = value;
+function getArrayEllemSumAliqoutTwo(array){
+    let sum = 0;
+
+    for(let i  = 0; i < array.length; i++){
+        if(array[i] % 2 == 0){
+            sum += array[i];
+        }
     }
 
-    get getCountZeroEllem(){
-        let counter = 0;
-        for(let i  = 0; i <= this.array.length-1; i++){
-            if(this.array[i] == 0){
-                counter++;
-            }
-        }
-        return counter;
-    }
-    get getNegattiveAllements(){
-        let counter = 0;
-        for(let i  = 0; i <= this.array.length-1; i++){
-            if(this.array[i] < 0){
-                counter++;
-            }
-        }
-        return counter;
-    }
-    get getPositiveAllements(){
-        let counter = 0;
-        for(let i  = 0; i <= this.array.length-1; i++){
-            if(this.array[i] > 0){
-                counter++;
-            }
-        }
-        return counter;
-    }
-    get getSimpleEments(){
-        let counter = 0;
-        for(let i  = 0; i <= this.array.length-1; i++){
-            let curretNumber = this.array[i];
-            if(curretNumber % this.array[i+1] != 0){
-                return false;
-            }
-            else counter++;
-        }
-        return counter;
-    }
-    
+    return sum;
 }
-let testArr = [1,2,3,4,5,6,7,8,9,10];
-let aecount = new arrayElementsCount(testArr);
-aecount.getSimpleEments;
+
+function getArrayEllemSumAliquotThree(array){
+    let sum = 0;
+
+    for(let i  = 0; i < array.length; i++){
+        if(array[i] % 3 == 0){
+            sum += array[i];
+        }
+    }
+
+    return sum;
+}
+
+function getNotEvenPositiveArrayEllem(array){
+    let sum = 0;
+
+    for(let i  = 0; i < array.length; i++){
+        if(array[i] % 2 != 0 && array[i] > 0){
+            sum += array[i];
+        }
+    }
+
+    return sum;
+}
+
+//10) подсчет элементов в массиве +
+function getAmountArrayZeroEllem(array){
+    let counter = 0;
+    for(let i = 0; i < array.length; i++){
+        if(array[i] == 0){
+            counter++;
+        }
+    }
+    return counter;
+}
+
+function getAmountArrayNegativeEllem(array){
+    let counter = 0;
+    for(let i = 0; i < array.length; i++){
+        if(array[i] < 0){
+            counter++;
+        }
+    }
+    return counter;
+}
+
+function getAmountArrayZeroEllem(array){
+    let counter = 0;
+
+    for(let i = 0; i < array.length; i++){
+        if(array[i] >= 0){
+            counter++;
+        }
+    }
+
+    return counter;
+}
+
+function getAmountArrayZeroEllem(array){
+    let counter = 0;
+    for(let i = 0; i < array.length; i++){
+        let flag = true;
+        for(let j = 2; j < i; j++){
+            if(array[i] % j == 0){
+                flag = false;
+                break;
+            }
+        }
+
+        if(flag == true){
+            console.log(array[i]);
+            counter++;
+        }
+    }
+
+    return counter;
+}
 
 //11) dec to bin
 function decToBin(number){
@@ -231,35 +246,28 @@ function decToBin(number){
 }
 decToBin(15);
 
-//12) double array 
-function matrixGenerator(stroke, collumn){
-    let mattrix = [];
-    for(let i = 0; i <= stroke-1; i++){
-        mattrix[i] = [];
-        for(let j = 0; j <= collumn-1; j++){
-            mattrix[i][j] = Math.floor(Math.random() * 10);
-        }   
+let testMatrix2 = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,0]
+]
+//12) 9-10 задания для двумерных массивов
+function getDoubleArraySum(matrix){
+    let sum = 0;
+    for(let i = 0; i < matrix[0].length; i++){
+        matrix[i] = [];
+        for(let j = 0; j < matrix.length; j++){
+            sum += matrix[i][j];
+        }
     }
-    console.log(mattrix);
+    console.log(matrix);
+
+    return sum;
 }
+getDoubleArraySum(testMatrix2);
 
-class doubleArray{
-    constructor(matrix){
-        this.matrix = matrix;
-    }
-    set setMatrix(value){
-        this.matrix = value;
-    }
 
-    get getSumMatrixEllem(){
-        let summ = 0;
-        summ += this.matrix;
-    }
-}
-let dbm = new doubleArray(matrixGenerator(3,3));
-dbm.getSumMatrixEllem;
-
-//13) summ min for max
+//13) summ min for max+
 function sumMinForMax(minNumber, maxNumber){
     let sum = 0;
     if(minNumber >= maxNumber){
@@ -303,57 +311,57 @@ function sumMinForMaxPositive(minNumber, maxNumber){
     }
 }
 
-//14) average arr and double arr
-let averArr = [1,2,3,4,5,6,7,8,9,10];
+//14) average arr and double arr+
 function getArrAverage(array){
     let average = 0;
     let sum = 0;
+
     for(let i = 0; i <= array.length-1; i++){
         sum += array[i];
-        console.log(sum);
     }
+
     average = sum / array.length;
     return average;
 }
-getArrAverage(averArr);
 
 function getEvenArrAverage(array){
     let average = 0;
     let sum = 0;
     let counter = 0;
+
     for(let i = 0; i <= array.length-1; i++){
         if(array[i] % 2 == 0){
             sum += array[i];
             counter++;
         }
-        console.log(sum);
     }
+
     average = sum / counter;
     return average;
 }
-getEvenArrAverage(averArr);
 
 function getNotEvenArrAverage(array){
     let average = 0;
     let sum = 0;
     let counter = 0;
+
     for(let i = 0; i <= array.length-1; i++){
         if(array[i] % 2 != 0){
             sum += array[i];
             counter++;
         }
-        console.log(sum);
     }
+
     average = sum / counter;
     return average;
 }
-getNotEvenArrAverage(averArr);
 
 function getDoubleArrAverage(stroke, collumn){
     let average = 0;
     let sum = 0;
     let counter = 0;
     let matrix = [];
+
     for(let i = 0; i <= stroke-1; i++){
         matrix[i] = [];
         for(let j = 0; j <= collumn-1; j++){
@@ -362,11 +370,10 @@ function getDoubleArrAverage(stroke, collumn){
             counter++;
         }
     }
-    console.log(matrix);
+
     average = sum / counter;
     return average;
 }
-getDoubleArrAverage(3,3);
 
 function getEvenDoubleArrAverage(stroke, collumn){
     let average = 0;
@@ -383,13 +390,11 @@ function getEvenDoubleArrAverage(stroke, collumn){
             }
         }
     }
-    console.log(matrix);
     average = sum / counter;
     return average;
 }
-getEvenDoubleArrAverage(3,3);
 
-function getEvenDoubleArrAverage(stroke, collumn){
+function getNotEvenDoubleArrAverage(stroke, collumn){
     let average = 0;
     let sum = 0;
     let counter = 0;
@@ -404,41 +409,35 @@ function getEvenDoubleArrAverage(stroke, collumn){
             }
         }
     }
-    console.log(matrix);
     average = sum / counter;
     return average;
 }
-getEvenDoubleArrAverage(3,3);
 
-//15) transport matrix
-function matrixTransport(matrix){
-
+//15) transport matrix +
+function getTransposeMatrix(matrix){
     let m = matrix.length;
     let n = matrix[0].length;
-    let transpMatrix = [];
-
-    if(matrix.length === 1 || matrix.length === 0){
-        return matrix;
-    }
+    let transposeMatrix = [];
 
     for(let i = 0; i < n; i++){
-        transpMatrix[i] = [];
+        transposeMatrix[i] = [];
         for(let j = 0; j < m; j++){
-            transpMatrix[i][j] = matrix[j][i];
+            transposeMatrix[i][j] = matrix[j][i];
         }
     }
 
-    return transpMatrix;
+    return transposeMatrix;
 }
-
-//16 summ matrix
+//16 суммирование матриц +
 function summMatrix(firstMatrix, secondMatrix){
     let m = firstMatrix.length;
     let n = firstMatrix[0].length;
     let newMatrix = [];
+
     if(firstMatrix.length > secondMatrix.length || secondMatrix.length > firstMatrix.length){
         return false;
     }
+    
     else{
         for(let i = 0; i < m; i++){
             newMatrix[i] = [];
@@ -471,27 +470,7 @@ dellMatrixStringWithZero(testMatrix);
 
 
 
-//рекурсии
-/*function f(min, max){
-    let sum = 0;
-    if(++min <= max){
-        sum += f(min, max) + min;
-    }
-    return sum;
-}
-f(0, 10);*/
-
-/*function fr(arr, index){
-    index = index || 0;
-    let s = 0;
-    if(index < arr.length){
-        s = arr[index] + fr(arr, ++index);
-    }
-    return s;
-}
-fr([1,2,3,4,5,6,7,8,9]);*/
-
-
+//sort
 function bubbleSort(array){
     if(array instanceof Array){
         for(let i = 0; i < array.length; i++){
@@ -507,3 +486,21 @@ function bubbleSort(array){
     }
 }
 bubbleSort([1,5,3,6,7,4,3]);
+
+function selectionSort(array){
+    for(let i = 0; i < array.length; i++){
+        let minValue = i;
+        for(let j = i + 1; j < array.length; j++){
+            if(array[j] < array[minValue]){
+                minValue = j;
+            }
+            if(minValue != i){
+                let currentNumber = array[i];
+                array[i] = array[minValue];
+                array[minValue] = currentNumber;
+            }
+        }
+    }
+    return array;
+}
+selectionSort([1,5,3,6,7,4,3]);
