@@ -96,6 +96,30 @@ function Rectangle(width, height){
     this.width = width;
     this.height = height;
 }
+/*class Rectangle2{
+    constructor(width, height){
+        this.width = width;
+        this.height = height;
+    }
+    /** 
+     * @param {number} valueWidth
+     
+    set setWidth(valueWidth){
+        this.width = valueWidth;
+    }
+    
+    /**
+     * @param {any} valueHeight
+    
+    set setHeight(valueHeight){
+        this.height = valueHeight;
+    }
+
+    get getRectSquare(){
+        return this.width * this.height;
+    }
+}*/
+
 Rectangle.prototype.square = function(){
     return this.width * this.height;
 }
@@ -137,44 +161,14 @@ function getFactorial(number){
 }
 
 //9) сумма элементов массива +
-function getArrayEllemSum(array){
+Array.prototype.ellemSum = function(compare){
     let sum = 0;
-    for(let i  = 0; i < array.length; i++){
-        sum += array[i];
-    }
-    return sum;
-}
+    let counter = 0;
+    let arrayLenth = this.length;
 
-function getArrayEllemSumAliqoutTwo(array){
-    let sum = 0;
-
-    for(let i  = 0; i < array.length; i++){
-        if(array[i] % 2 == 0){
-            sum += array[i];
-        }
-    }
-
-    return sum;
-}
-
-function getArrayEllemSumAliquotThree(array){
-    let sum = 0;
-
-    for(let i  = 0; i < array.length; i++){
-        if(array[i] % 3 == 0){
-            sum += array[i];
-        }
-    }
-
-    return sum;
-}
-
-function getNotEvenPositiveArrayEllem(array){
-    let sum = 0;
-
-    for(let i  = 0; i < array.length; i++){
-        if(array[i] % 2 != 0 && array[i] > 0){
-            sum += array[i];
+    for(let i  = 0; i < arrayLenth; i++){
+        if(compare(this[i])){
+            sum += this[i];
         }
     }
 
@@ -182,61 +176,25 @@ function getNotEvenPositiveArrayEllem(array){
 }
 
 //10) подсчет элементов в массиве +
-function getAmountArrayZeroEllem(array){
+Array.prototype.ellemCounter = function(compare){
     let counter = 0;
-    for(let i = 0; i < array.length; i++){
-        if(array[i] == 0){
+    console.log(this.length);
+    for(let i = 0; i < this.length; i++){
+        if(compare(this[i])){
             counter++;
-        }
-    }
-    return counter;
-}
-
-function getAmountArrayNegativeEllem(array){
-    let counter = 0;
-    for(let i = 0; i < array.length; i++){
-        if(array[i] < 0){
-            counter++;
-        }
-    }
-    return counter;
-}
-
-function getAmountArrayZeroEllem(array){
-    let counter = 0;
-
-    for(let i = 0; i < array.length; i++){
-        if(array[i] >= 0){
-            counter++;
+            console.log(this.length);
         }
     }
 
     return counter;
 }
-
-function getAmountArrayZeroEllem(array){
-    let counter = 0;
-    for(let i = 0; i < array.length; i++){
-        let flag = true;
-        for(let j = 2; j < i; j++){
-            if(array[i] % j == 0){
-                flag = false;
-                break;
-            }
-        }
-
-        if(flag == true){
-            console.log(array[i]);
-            counter++;
-        }
-    }
-
-    return counter;
-}
+let testArray3 = [1,2,3,4,5,6,7,8,9,0,0,10];
+testArray3.ellemCounter(() => ({}));
 
 //11) dec to bin
 function decToBin(number){
     let binStr = null;
+
     if(number != 0){
         while(number > 0){
             let c = number;
@@ -246,28 +204,37 @@ function decToBin(number){
 }
 decToBin(15);
 
-let testMatrix2 = [
-    [1,2,3],
-    [4,5,6],
-    [7,8,0]
-]
-//12) 9-10 задания для двумерных массивов
-function getDoubleArraySum(matrix){
+//12) 9-10 задания для двумерных массивов +
+Array.prototype.doubleEllemSum = function(compare){
     let sum = 0;
-    for(let i = 0; i < matrix[0].length; i++){
-        matrix[i] = [];
-        for(let j = 0; j < matrix.length; j++){
-            sum += matrix[i][j];
+
+    for(let i = 0; i < this.length; i++){
+        for(let j = 0; j < this.length; j++){
+            if(compare(this[i][j])){
+                sum += this[i][j];
+            }
         }
     }
-    console.log(matrix);
 
     return sum;
 }
-getDoubleArraySum(testMatrix2);
 
+Array.prototype.doubleEllemCounter = function(compare){
+    let counter = 0;
 
-//13) summ min for max+
+    for(let i = 0; i < this.length; i++){
+        for(let j = 0; j < this.length; j++){
+            if(compare(this[i][j]) || compare(this[i][j] == 0)){
+                counter++;
+            }
+            
+        }
+    }
+
+    return counter;
+}
+
+//13) summ min for max + 
 function sumMinForMax(minNumber, maxNumber){
     let sum = 0;
     if(minNumber >= maxNumber){
@@ -311,50 +278,24 @@ function sumMinForMaxPositive(minNumber, maxNumber){
     }
 }
 
-//14) average arr and double arr+
-function getArrAverage(array){
+//14) Среднее значение элементов одномерного и двумерного массивов
+Array.prototype.ellemAverageSum = function(compare){
     let average = 0;
     let sum = 0;
+    let arrayLenth = this.length;
 
-    for(let i = 0; i <= array.length-1; i++){
-        sum += array[i];
-    }
-
-    average = sum / array.length;
-    return average;
-}
-
-function getEvenArrAverage(array){
-    let average = 0;
-    let sum = 0;
-    let counter = 0;
-
-    for(let i = 0; i <= array.length-1; i++){
-        if(array[i] % 2 == 0){
-            sum += array[i];
-            counter++;
+    for(let i = 0; i < arrayLenth; i++){
+        if(compare(this[i])){
+            sum += this[i];
         }
     }
 
-    average = sum / counter;
+    average = sum / arrayLenth;
     return average;
 }
+let testArray2 = [1,2,3,4,5,6,7,8,9,0,0,10];
+testArray2.ellemAverageSum((value => value));
 
-function getNotEvenArrAverage(array){
-    let average = 0;
-    let sum = 0;
-    let counter = 0;
-
-    for(let i = 0; i <= array.length-1; i++){
-        if(array[i] % 2 != 0){
-            sum += array[i];
-            counter++;
-        }
-    }
-
-    average = sum / counter;
-    return average;
-}
 
 function getDoubleArrAverage(stroke, collumn){
     let average = 0;
@@ -474,18 +415,18 @@ dellMatrixStringWithZero(testMatrix);
 function bubbleSort(array){
     if(array instanceof Array){
         for(let i = 0; i < array.length; i++){
-            for(let j = 0; j < array.length; j++){
-                if(array[j] >= array[j + 1]){
-                    let curretNumber = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = curretNumber;
+            for(let j = i + 1; j < array.length; j++){
+                if(array[i] > array[j]){
+                    let curretNumber = array[i];
+                    array[i] = array[j];
+                    array[j] = curretNumber;
                 }
             }
         }
         return array;
     }
 }
-bubbleSort([1,5,3,6,7,4,3]);
+bubbleSort([1,5,3,6,7,4,3,2,1,1,4,5,34,5,434,535,34,53,3,4,5,3]);
 
 function selectionSort(array){
     for(let i = 0; i < array.length; i++){
@@ -504,3 +445,26 @@ function selectionSort(array){
     return array;
 }
 selectionSort([1,5,3,6,7,4,3]);
+
+//bind call
+function f(a,b,c){
+    return this.a + this.b + a + b + c;
+}
+let obj = {
+    a : 3,
+    b : 10,
+};
+
+let ff = f.bind(obj, 1, 4, 7);
+ff();
+
+function f1(a,b,c){
+    return this.a + this.b + a + b + c;
+}
+let obj1 = {
+    a : 3,
+    b : 10,
+};
+
+let ff1 = f1.call(obj, 1, 4, 7);
+ff1();
