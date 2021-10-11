@@ -7,7 +7,7 @@ function isAnagramma(firstWord, secondWord) {
     };
 
     for (let i = 0; i < firstWord.length; i++) {
-        let char1 = word1[i];
+        let char1 = firstWord[i];
         let counter1 = 0;
         let counter2 = 0;
         for (let j = 0; j < secondWord.length; j++) {
@@ -36,29 +36,27 @@ function numbersCount(number){
     let numeral = 0;
     let baseNumber = 0;
     while(number) {
-        numeral = number % 10;
         baseNumber = number;
+        numeral = number % 10;
         number = (number - numeral) / 10;
         counter++;
     }
     return counter;
 }
 
-//4) уникальные слова в предложении 
-    let str = "kol lok lok fddc cdda asd adas adas";
+//4) уникальные слова в предложении +
     function unicWords(string){
         let counter = 0;
         let wordArray = string.split(" ");
         console.log(wordArray);
         for(let i = 0; i < wordArray.length; i++){
             let someWord = wordArray[i];
-            if(someWord !== wordArray[i]){
+            if(someWord !== wordArray[i + 1]){
                 counter++;
             }
         }
         return counter;
     }
-    unicWords(str);
 
 //5) вхождение каждого слова в строку
 let someStr = "frt, ad, asd, rwefs, frt, frt, sads, asd, 43rfw. asd";
@@ -70,11 +68,15 @@ function wordsCounter(string){
     for(let j = 0; j <= wordsArray.length - 1; j++){
         word = wordsArray[j];
         for(let i = 0; i <= wordsArray.length - 1; i++){
-            if(word == wordsArray[i]){
+            if(word == wordsArray[j]){
                 counter++;
+                console.log(`word ${word} and ${counter}`);
+                break;
             }
         }
+        
     }
+    
 }
 wordsCounter(someStr);
 
@@ -92,81 +94,103 @@ function showFibonacciNumbers(amountNumbers){
 }
 
 //7)площадь и периметр круга, треугольника, квадрата + 
-function Rectangle(width, height){
-    this.width = width;
-    this.height = height;
-}
-/*class Rectangle2{
+class Rectangle{
     constructor(width, height){
         this.width = width;
         this.height = height;
     }
     /** 
      * @param {number} valueWidth
-     
+     */
     set setWidth(valueWidth){
         this.width = valueWidth;
     }
     
     /**
-     * @param {any} valueHeight
-    
+     * @param {number} valueHeight
+    */
     set setHeight(valueHeight){
         this.height = valueHeight;
     }
 
-    get getRectSquare(){
+    get getRectangleSquare(){
         return this.width * this.height;
     }
-}*/
 
-Rectangle.prototype.square = function(){
-    return this.width * this.height;
-}
-Rectangle.prototype.perimeter = function(){
-    return (this.width + this.height) * 2;
+    get getRectanglePerimeter(){
+        return (this.width + this.height) * 2;
+    }
 }
 
-function Triangle(aSide, bSide, cSide){
-    this.aSide = aSide;
-    this.bSide = bSide;
-    this.cSide = cSide;
-}
-Triangle.prototype.square = function(){
-    let halfPerimeter = (this.aSide + this.bSide + this.cSide) / 2;
-    return Math.sqrt(halfPerimeter * (halfPerimeter - this.aSide) * (halfPerimeter - this.bSide) * (halfPerimeter - this.cSide));
-}
-Triangle.prototype.perimeter = function(){
-    return this.aSide + this.bSide + this.cSide;
+class Triangle{
+    constructor(aSide, bSide, cSide){
+        this.aSide = aSide;
+        this.bSide = bSide;
+        this.cSide = cSide;
+    }
+
+    /**
+     * @param {number} value
+    */
+    set setASide(value){
+        this.aSide = value;
+    }
+
+    /**
+     * @param {number} value
+     */
+    set setBSide(value){
+        this.bSide = value;
+    }
+
+    /**
+     * @param {number} value
+    */
+    set setCSide(value){
+        this.cSide = value;
+    }
+
+    get getTriangleSquare(){
+        let halfPerimeter = (this.aSide + this.bSide + this.cSide) / 2;
+        return Math.sqrt(halfPerimeter * (halfPerimeter - this.aSide) * (halfPerimeter - this.bSide) * (halfPerimeter - this.cSide));
+    }
 }
 
-function Circle(radius){
-    this.radius = radius;
-}
-Circle.prototype.square = function(){
-    return Math.PI * (this.radius * this.radius);
-}
-Circle.prototype.perimeter = function(){
-    return 2 * Math.PI * this.radius;
+class Circle{
+    constructor(radius){
+        this.radius = radius;
+    }
+
+    /**
+     * @param {number} value
+     */
+    set setRadius(value){
+        this.radius = value;
+    }
+
+    get getCircleSquare(){
+        return Math.PI * (this.radius * this.radius);
+    }
+
+    get getCirclePerimeter(){
+        return 2 * Math.PI * this.radius;
+    }
 }
 
 //8) факториал +
 function getFactorial(number){
-    if(number == 0 || number == 1) {
-        return number;
+    let result = 1;
+    for(let i = number; i > 1; i--){
+        result *= i;
     }
-    else {
-        return number * getFactorial(number - 1);
-    }
+    return result;
 }
 
 //9) сумма элементов массива +
 Array.prototype.ellemSum = function(compare){
     let sum = 0;
-    let counter = 0;
-    let arrayLenth = this.length;
 
-    for(let i  = 0; i < arrayLenth; i++){
+    for(let i  = 0; i < this.length; i++){
         if(compare(this[i])){
             sum += this[i];
         }
@@ -178,31 +202,32 @@ Array.prototype.ellemSum = function(compare){
 //10) подсчет элементов в массиве +
 Array.prototype.ellemCounter = function(compare){
     let counter = 0;
-    console.log(this.length);
+
     for(let i = 0; i < this.length; i++){
         if(compare(this[i])){
             counter++;
-            console.log(this.length);
         }
     }
 
     return counter;
 }
-let testArray3 = [1,2,3,4,5,6,7,8,9,0,0,10];
-testArray3.ellemCounter(() => ({}));
 
-//11) dec to bin
+//11) dec to bin +/-
 function decToBin(number){
-    let binStr = null;
-
-    if(number != 0){
-        while(number > 0){
-            let c = number;
-            console.log(c);
+    let binStr = "";
+        while(number){
+            let nextNumber = number / 2;
+            let fraсtionalPart = nextNumber % 2;
+            let intNumber = nextNumber - fraсtionalPart;
+            number = intNumber;
+            let bit = number - (intNumber * 2);
+            binStr = binStr + bit;
+            return binStr;
         }
-    }
+
+    
 }
-decToBin(15);
+decToBin(25);
 
 //12) 9-10 задания для двумерных массивов +
 Array.prototype.doubleEllemSum = function(compare){
@@ -224,7 +249,7 @@ Array.prototype.doubleEllemCounter = function(compare){
 
     for(let i = 0; i < this.length; i++){
         for(let j = 0; j < this.length; j++){
-            if(compare(this[i][j]) || compare(this[i][j] == 0)){
+            if(compare(this[i][j])){
                 counter++;
             }
             
@@ -278,36 +303,15 @@ function sumMinForMaxPositive(minNumber, maxNumber){
     }
 }
 
-//14) Среднее значение элементов одномерного и двумерного массивов
+//14) Среднее значение элементов одномерного и двумерного массивов +
 Array.prototype.ellemAverageSum = function(compare){
     let average = 0;
     let sum = 0;
-    let arrayLenth = this.length;
+    let counter = 0;
 
-    for(let i = 0; i < arrayLenth; i++){
+    for(let i = 0; i < this.length; i++){
         if(compare(this[i])){
             sum += this[i];
-        }
-    }
-
-    average = sum / arrayLenth;
-    return average;
-}
-let testArray2 = [1,2,3,4,5,6,7,8,9,0,0,10];
-testArray2.ellemAverageSum((value => value));
-
-
-function getDoubleArrAverage(stroke, collumn){
-    let average = 0;
-    let sum = 0;
-    let counter = 0;
-    let matrix = [];
-
-    for(let i = 0; i <= stroke-1; i++){
-        matrix[i] = [];
-        for(let j = 0; j <= collumn-1; j++){
-            matrix[i][j] = Math.floor(Math.random() * 10);
-            sum += matrix[i][j];
             counter++;
         }
     }
@@ -316,45 +320,24 @@ function getDoubleArrAverage(stroke, collumn){
     return average;
 }
 
-function getEvenDoubleArrAverage(stroke, collumn){
-    let average = 0;
+Array.prototype.doubleEllemAverageSum = function(compare){
     let sum = 0;
+    let average = 0;
     let counter = 0;
-    let matrix = [];
-    for(let i = 0; i <= stroke-1; i++){
-        matrix[i] = [];
-        for(let j = 0; j <= collumn-1; j++){
-            matrix[i][j] = Math.floor(Math.random() * 10);
-            if(matrix[i][j] % 2 == 0){
-                sum += matrix[i][j];
+
+    for(let i = 0; i < this.length; i++){
+        for(let j = 0; j < this.length; j++){
+            if(compare(this[i][j])){
+                sum += this[i][j];
                 counter++;
             }
         }
     }
-    average = sum / counter;
-    return average;
+
+    return average = sum / counter;
 }
 
-function getNotEvenDoubleArrAverage(stroke, collumn){
-    let average = 0;
-    let sum = 0;
-    let counter = 0;
-    let matrix = [];
-    for(let i = 0; i <= stroke-1; i++){
-        matrix[i] = [];
-        for(let j = 0; j <= collumn-1; j++){
-            matrix[i][j] = Math.floor(Math.random() * 10);
-            if(matrix[i][j] % 2 != 0){
-                sum += matrix[i][j];
-                counter++;
-            }
-        }
-    }
-    average = sum / counter;
-    return average;
-}
-
-//15) transport matrix +
+//15) транспортирование матрицы +
 function getTransposeMatrix(matrix){
     let m = matrix.length;
     let n = matrix[0].length;
@@ -370,7 +353,7 @@ function getTransposeMatrix(matrix){
     return transposeMatrix;
 }
 //16 суммирование матриц +
-function summMatrix(firstMatrix, secondMatrix){
+function sumMatrix(firstMatrix, secondMatrix){
     let m = firstMatrix.length;
     let n = firstMatrix[0].length;
     let newMatrix = [];
@@ -390,61 +373,21 @@ function summMatrix(firstMatrix, secondMatrix){
     }
 }
 
-let testMatrix = [
-    [1,2,3],
-    [4,5,6],
-    [7,8,0]
-]
-//17) delete string with 0
+//17) delete string with 0 + 
 function dellMatrixStringWithZero(matrix){
-    let m = matrix.length;
-    for(let i = 0; i < m; i++){
-        for(let j = 0; j < m; j++){
-            if(matrix[i][j] == 0){
-                matrix[i][j] == 1;
+
+    for(let i = 0; i < matrix.length; i++){
+        for(let j = 0; j < matrix.length; j++){
+            if(matrix[i][j] === 0){
+                matrix.splice(i, 1);
+                i--;
             }
         }
     }
-    console.log(matrix);
+
+    return matrix;
 }
-dellMatrixStringWithZero(testMatrix);
 
-
-
-//sort
-function bubbleSort(array){
-    if(array instanceof Array){
-        for(let i = 0; i < array.length; i++){
-            for(let j = i + 1; j < array.length; j++){
-                if(array[i] > array[j]){
-                    let curretNumber = array[i];
-                    array[i] = array[j];
-                    array[j] = curretNumber;
-                }
-            }
-        }
-        return array;
-    }
-}
-bubbleSort([1,5,3,6,7,4,3,2,1,1,4,5,34,5,434,535,34,53,3,4,5,3]);
-
-function selectionSort(array){
-    for(let i = 0; i < array.length; i++){
-        let minValue = i;
-        for(let j = i + 1; j < array.length; j++){
-            if(array[j] < array[minValue]){
-                minValue = j;
-            }
-            if(minValue != i){
-                let currentNumber = array[i];
-                array[i] = array[minValue];
-                array[minValue] = currentNumber;
-            }
-        }
-    }
-    return array;
-}
-selectionSort([1,5,3,6,7,4,3]);
 
 //bind call
 function f(a,b,c){
