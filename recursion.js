@@ -6,20 +6,26 @@ function isAnnagramma(firstWord, secondWord){
         return false;
     }
 
+    
+}
 
+//3) количество цифр в числе
+function numbersCount(number){
+    let counter = 0;
+    let numeral = 0;
+    let baseNumber = 0;
+    if(number){
+
+    }
 }
 
 //6) числа фибоначи
 function fibonacciNumbers(amountNumbers){
     let fibNumbers = [0, 1];
 
-    if(amountNumbers > 0){
+    if(amountNumbers > 2){
         
-        fibNumbers.push(fibNumbers[0] + fibNumbers[1]);
-        fibonacciNumbers(--amountNumbers);
     }
-
-    return fibNumbers;
 }
 fibonacciNumbers(7);
 

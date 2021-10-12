@@ -5,7 +5,7 @@ function isAnagramma(firstWord, secondWord) {
     if (firstWord.length !== secondWord.length) {
         return false;
     };
-
+    
     for (let i = 0; i < firstWord.length; i++) {
         let char1 = firstWord[i];
         let counter1 = 0;
@@ -34,20 +34,21 @@ function isAnagramma(firstWord, secondWord) {
 function numbersCount(number){
     let counter = 0;
     let numeral = 0;
-    let baseNumber = 0;
+
     while(number) {
-        baseNumber = number;
         numeral = number % 10;
         number = (number - numeral) / 10;
         counter++;
     }
+
     return counter;
 }
 
-//4) уникальные слова в предложении +
+//4) уникальные слова в предложении +/-
     function unicWords(string){
         let counter = 0;
-        let wordArray = string.split(" ");
+        let target = /\s|\,|\./i;
+        let wordArray = string.split(target);
         console.log(wordArray);
         for(let i = 0; i < wordArray.length; i++){
             let someWord = wordArray[i];
@@ -57,8 +58,9 @@ function numbersCount(number){
         }
         return counter;
     }
-
-//5) вхождение каждого слова в строку
+let testString = "frt, ad, asd, rwefs, frt, frt, sads, asd, 43rfw. asd";
+unicWords(testString);
+//5) вхождение каждого слова в строку +/-
 let someStr = "frt, ad, asd, rwefs, frt, frt, sads, asd, 43rfw. asd";
 function wordsCounter(string){
     let wordsArray = string.toLowerCase().split(" ");
@@ -81,13 +83,11 @@ function wordsCounter(string){
 wordsCounter(someStr);
 
 //6) вывод чисел фибоначи + 
-function showFibonacciNumbers(amountNumbers){
+function getFibonacciNumbers(amountNumbers){
     let fibNumbers = [0, 1];
 
     for(let i = 2; i < amountNumbers; i++){
-        let prevNumber = fibNumbers[i - 1];
-        let nextNumber = fibNumbers[i - 2];
-        fibNumbers.push(prevNumber + nextNumber);
+        fibNumbers.push(fibNumbers[i - 1] + fibNumbers[i - 2]);
     }
 
     return fibNumbers;
@@ -212,23 +212,32 @@ Array.prototype.ellemCounter = function(compare){
     return counter;
 }
 
-//11) dec to bin +/-
+//11) dec to bin +
 function decToBin(number){
-    let binStr = "";
-        while(number){
-            let nextNumber = number / 2;
-            let fraсtionalPart = nextNumber % 2;
-            let intNumber = nextNumber - fraсtionalPart;
-            number = intNumber;
-            let bit = number - (intNumber * 2);
-            binStr = binStr + bit;
-            return binStr;
+    let strBit = "";
+    let nextNumber = number;
+
+    while(nextNumber > 0){
+        
+        if(Number.isInteger(nextNumber)){
+            strBit += nextNumber % 2;
         }
+        else{
+            nextNumber = nextNumber - (nextNumber % 2);
+            strBit += nextNumber % 2;
+        }
+      
 
+        nextNumber /= 2;
+    }
     
+    let trueString = "";
+    for(let i = strBit.length - 2; i >= 0; i--){
+        trueString += strBit.charAt(i);
+    }
+    return trueString;
 }
-decToBin(25);
-
+decToBin(4);
 //12) 9-10 задания для двумерных массивов +
 Array.prototype.doubleEllemSum = function(compare){
     let sum = 0;
@@ -339,13 +348,13 @@ Array.prototype.doubleEllemAverageSum = function(compare){
 
 //15) транспортирование матрицы +
 function getTransposeMatrix(matrix){
-    let m = matrix.length;
-    let n = matrix[0].length;
+    let rows = matrix.length;
+    let collumns = matrix[0].length;
     let transposeMatrix = [];
 
-    for(let i = 0; i < n; i++){
+    for(let i = 0; i < collumns; i++){
         transposeMatrix[i] = [];
-        for(let j = 0; j < m; j++){
+        for(let j = 0; j < rows; j++){
             transposeMatrix[i][j] = matrix[j][i];
         }
     }
@@ -354,40 +363,41 @@ function getTransposeMatrix(matrix){
 }
 //16 суммирование матриц +
 function sumMatrix(firstMatrix, secondMatrix){
-    let m = firstMatrix.length;
-    let n = firstMatrix[0].length;
-    let newMatrix = [];
+
+    let rows = firstMatrix.length;
+    let collumns = firstMatrix[0].length;
+    let summuryMatrix = [];
 
     if(firstMatrix.length > secondMatrix.length || secondMatrix.length > firstMatrix.length){
         return false;
     }
     
     else{
-        for(let i = 0; i < m; i++){
-            newMatrix[i] = [];
-            for(let j = 0; j < n; j++){
-                newMatrix[i][j] = firstMatrix[i][j] + secondMatrix[i][j];
+        for(let i = 0; i < rows; i++){
+            summuryMatrix[i] = [];
+            for(let j = 0; j < collumns; j++){
+                summuryMatrix[i][j] = firstMatrix[i][j] + secondMatrix[i][j];
             }
         }
-        return newMatrix;
+        return summuryMatrix;
     }
 }
 
-//17) delete string with 0 + 
+//17) удаление строки если в ней есть 0
 function dellMatrixStringWithZero(matrix){
+    let rows = matrix.length;
+    let collumns = matrix[0].length;
 
-    for(let i = 0; i < matrix.length; i++){
-        for(let j = 0; j < matrix.length; j++){
+    for(let i = 0; i < rows; i++){
+        for(let j = 0; j < collumns; j++){
             if(matrix[i][j] === 0){
                 matrix.splice(i, 1);
-                i--;
             }
         }
     }
 
     return matrix;
 }
-
 
 //bind call
 function f(a,b,c){
@@ -411,3 +421,5 @@ let obj1 = {
 
 let ff1 = f1.call(obj, 1, 4, 7);
 ff1();
+
+
