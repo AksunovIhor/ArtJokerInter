@@ -47,12 +47,12 @@ function numbersCount(number){
 //4) уникальные слова в предложении +/-
     function unicWords(string){
         let counter = 0;
-        let target = /\s|\,|\./i;
+        let target = /[\s.,]+/gi;
         let wordArray = string.split(target);
         console.log(wordArray);
         for(let i = 0; i < wordArray.length; i++){
-            let someWord = wordArray[i];
-            if(someWord !== wordArray[i + 1]){
+            let someWord = new RegExp(wordArray[i]);
+            if(!someWord.test(wordArray)){
                 counter++;
             }
         }
@@ -95,85 +95,92 @@ function getFibonacciNumbers(amountNumbers){
 
 //7)площадь и периметр круга, треугольника, квадрата + 
 class Rectangle{
+    #width;
+    #height;
     constructor(width, height){
-        this.width = width;
-        this.height = height;
+        this.#width = width;
+        this.#height = height;
     }
     /** 
      * @param {number} valueWidth
      */
     set setWidth(valueWidth){
-        this.width = valueWidth;
+        this.#width = valueWidth;
     }
     
     /**
      * @param {number} valueHeight
     */
     set setHeight(valueHeight){
-        this.height = valueHeight;
+        this.#height = valueHeight;
     }
 
     get getRectangleSquare(){
-        return this.width * this.height;
+        return this.#width * this.#height;
     }
 
     get getRectanglePerimeter(){
-        return (this.width + this.height) * 2;
+        return (this.#width + this.#height) * 2;
     }
 }
 
 class Triangle{
+    #aSide;
+    #bSide;
+    #cSide;
     constructor(aSide, bSide, cSide){
-        this.aSide = aSide;
-        this.bSide = bSide;
-        this.cSide = cSide;
+        this.#aSide = aSide;
+        this.#bSide = bSide;
+        this.#cSide = cSide;
     }
 
     /**
      * @param {number} value
     */
     set setASide(value){
-        this.aSide = value;
+        this.#aSide = value;
     }
 
     /**
      * @param {number} value
      */
     set setBSide(value){
-        this.bSide = value;
+        this.#bSide = value;
     }
 
     /**
      * @param {number} value
     */
     set setCSide(value){
-        this.cSide = value;
+        this.#cSide = value;
     }
 
     get getTriangleSquare(){
-        let halfPerimeter = (this.aSide + this.bSide + this.cSide) / 2;
-        return Math.sqrt(halfPerimeter * (halfPerimeter - this.aSide) * (halfPerimeter - this.bSide) * (halfPerimeter - this.cSide));
+        let halfPerimeter = (this.#aSide + this.#bSide + this.#cSide) / 2;
+        return Math.sqrt(halfPerimeter * (halfPerimeter - this.#aSide) * (halfPerimeter - this.#bSide) * (halfPerimeter - this.#cSide));
     }
 }
 
 class Circle{
+    #radius;
+
     constructor(radius){
-        this.radius = radius;
+        this.#radius = radius;
     }
 
     /**
      * @param {number} value
      */
     set setRadius(value){
-        this.radius = value;
+        this.#radius = value;
     }
 
     get getCircleSquare(){
-        return Math.PI * (this.radius * this.radius);
+        return Math.PI * (this.#radius * this.#radius);
     }
 
     get getCirclePerimeter(){
-        return 2 * Math.PI * this.radius;
+        return 2 * Math.PI * this.#radius;
     }
 }
 
@@ -226,7 +233,6 @@ function decToBin(number){
             nextNumber = nextNumber - (nextNumber % 2);
             strBit += nextNumber % 2;
         }
-      
 
         nextNumber /= 2;
     }
@@ -384,7 +390,7 @@ function sumMatrix(firstMatrix, secondMatrix){
 }
 
 //17) удаление строки если в ней есть 0
-function dellMatrixStringWithZero(matrix){
+function dellMatrixRowWithZero(matrix){
     let rows = matrix.length;
     let collumns = matrix[0].length;
 
@@ -392,12 +398,35 @@ function dellMatrixStringWithZero(matrix){
         for(let j = 0; j < collumns; j++){
             if(matrix[i][j] === 0){
                 matrix.splice(i, 1);
+                rows = matrix.length;
             }
         }
     }
 
     return matrix;
 }
+
+function dellMatrixCollumnWithZero(matrix){
+    let rows = matrix.length;
+    let collumns = matrix[0].length;
+
+    for(let i = 0; i < rows; i++){
+        for(let j = 0; j < collumns; j++){
+            if(matrix[j][j] === 0){
+                matrix[j].splice(j, 0);
+                collumns = matrix[0].length;
+            }
+        }
+    }
+    return matrix;
+}
+
+let testMatrix = [
+    [1,0,3],
+    [4,5,6],
+    [7,8,0],
+];
+dellMatrixCollumnWithZero(testMatrix);
 
 //bind call
 function f(a,b,c){

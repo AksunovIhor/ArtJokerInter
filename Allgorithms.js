@@ -2,12 +2,13 @@
 function bubbleSort(array){
     if(array instanceof Array){
         for(let i = 0; i < array.length; i++){
-            for(let j = i + 1; j < array.length; j++){
-                if(array[i] > array[j]){
-                    let curretNumber = array[i];
-                    array[i] = array[j];
-                    array[j] = curretNumber;
+            for(let j = 0; j < array.length - i; j++){
+                if(array[j] > array[j + 1]){
+                    let curretNumber = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = curretNumber;
                 }
+                console.log("iter");
             }
         }
         return array;
@@ -27,8 +28,9 @@ function selectionSort(array){
                 array[i] = array[minValue];
                 array[minValue] = currentNumber;
             }
+            console.log("iter");
         }
     }
     return array;
 }
-selectionSort([1,5,3,6,7,4,3]);
+selectionSort([1,5,3,6,7,4,3,2,1,1,4,5,34,5,434,535,34,53,3,4,5,3]);

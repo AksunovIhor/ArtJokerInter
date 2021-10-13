@@ -22,7 +22,7 @@ function numbersCount(number){
 //6) числа фибоначи
 function fibonacciNumbers(amountNumbers){
     let fibNumbers = [0, 1];
-
+    
     if(amountNumbers > 2){
         
     }

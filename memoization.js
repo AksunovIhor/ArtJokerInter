@@ -18,12 +18,3 @@ function getFactorial(){
     }
 }
 
-/*let obj = {
-    a: "123",
-    b: "456",
-};
-
-let cache = new Map();
-cache.set(obj, true);
-
-console.log(cache);*/
