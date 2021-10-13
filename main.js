@@ -39,25 +39,30 @@ function numbersCount(number){
         numeral = number % 10;
         number = (number - numeral) / 10;
         counter++;
+        console.log(number);
     }
 
     return counter;
 }
+numbersCount(12345);
 
 //4) уникальные слова в предложении +/-
-    function unicWords(string){
-        let counter = 0;
-        let target = /[\s.,]+/gi;
-        let wordArray = string.split(target);
-        console.log(wordArray);
-        for(let i = 0; i < wordArray.length; i++){
-            let someWord = new RegExp(wordArray[i]);
-            if(!someWord.test(wordArray)){
-                counter++;
-            }
+function unicWords(string){
+    let counter = 0;
+    let target = /[\s.,]+/gi;
+    let wordsArray = string.split(target);
+    for(let i = 0; i < wordsArray.length; i++){
+        let someWord = wordsArray[i];
+        console.log(someWord);
+        if(wordsArray.includes(someWord)){
+            someWord = wordsArray[i + 1];
         }
-        return counter;
+        else{
+            counter++;
+        }
     }
+    return counter;
+}
 let testString = "frt, ad, asd, rwefs, frt, frt, sads, asd, 43rfw. asd";
 unicWords(testString);
 //5) вхождение каждого слова в строку +/-
@@ -75,10 +80,8 @@ function wordsCounter(string){
                 console.log(`word ${word} and ${counter}`);
                 break;
             }
-        }
-        
+        }   
     }
-    
 }
 wordsCounter(someStr);
 
@@ -275,47 +278,19 @@ Array.prototype.doubleEllemCounter = function(compare){
 }
 
 //13) summ min for max + 
-function sumMinForMax(minNumber, maxNumber){
+function sumMinForMaxCall(minNumber, maxNumber, compare){
     let sum = 0;
+
     if(minNumber >= maxNumber){
         return false;
     }
-    else{
-        for(let i = minNumber; i <= maxNumber; i++){
+    
+    for(let i = minNumber; i <= maxNumber; i++){
+        if(compare([i])){
             sum += i;
         }
-        return sum;
     }
-}
-
-function sumMinForMaxMultipleThree(minNumber, maxNumber){
-    let sum = 0;
-    if(minNumber >= maxNumber){
-        return false;
-    }
-    else{
-        for(let i = minNumber; i <= maxNumber; i++){
-            if(i % 3 == 0){
-                sum += i;
-            }
-        }
-        return sum;
-    }
-}
-
-function sumMinForMaxPositive(minNumber, maxNumber){
-    let sum = 0;
-    if(minNumber >= maxNumber){
-        return false;
-    }
-    else{
-        for(let i = minNumber; i <= maxNumber; i++){
-            if(i > 0){
-                sum += i;
-            }
-        }
-        return sum;
-    }
+    return sum;
 }
 
 //14) Среднее значение элементов одномерного и двумерного массивов +

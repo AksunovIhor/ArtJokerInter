@@ -13,18 +13,22 @@ function isAnnagramma(firstWord, secondWord){
 function numbersCount(number){
     let counter = 0;
     let numeral = 0;
-    let baseNumber = 0;
+
     if(number){
 
     }
 }
+numbersCount(12345);
 
 //6) числа фибоначи
 function fibonacciNumbers(amountNumbers){
     let fibNumbers = [0, 1];
-    
-    if(amountNumbers > 2){
-        
+
+    if(amountNumbers === 0 || amountNumbers === 1){
+        return fibNumbers;
+    }
+    else{
+
     }
 }
 fibonacciNumbers(7);
