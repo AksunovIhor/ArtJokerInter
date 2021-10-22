@@ -15,7 +15,7 @@ function numbersCount(number){
     let numeral = 0;
 
     if(number){
-
+        
     }
 }
 numbersCount(12345);

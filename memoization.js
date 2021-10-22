@@ -17,4 +17,6 @@ function getFactorial(){
         return number * result;
     }
 }
+let getfact = getFactorial();
+getfact(5);
 

@@ -39,51 +39,55 @@ function numbersCount(number){
         numeral = number % 10;
         number = (number - numeral) / 10;
         counter++;
-        console.log(number);
-    }
+    };
 
     return counter;
 }
-numbersCount(12345);
 
 //4) уникальные слова в предложении +/-
 function unicWords(string){
     let counter = 0;
-    let target = /[\s.,]+/gi;
-    let wordsArray = string.split(target);
+    let wordsArray = string.split(/[\s.,]+/gi);
+    let unicWordsCounter = 0;
     for(let i = 0; i < wordsArray.length; i++){
-        let someWord = wordsArray[i];
-        console.log(someWord);
-        if(wordsArray.includes(someWord)){
-            someWord = wordsArray[i + 1];
-        }
-        else{
-            counter++;
+        word = wordsArray[i];  
+        console.log(word);
+
+        for(let j = 0; j < wordsArray.length; j++){
+            if(word !== wordsArray[j]){
+                counter++;
+            }
+            if(counter < 2 && counter > 0){
+                unicWordsCounter++;
+            }
+            break;
         }
     }
-    return counter;
+
+    return unicWordsCounter;
+
 }
 let testString = "frt, ad, asd, rwefs, frt, frt, sads, asd, 43rfw. asd";
 unicWords(testString);
+
 //5) вхождение каждого слова в строку +/-
-let someStr = "frt, ad, asd, rwefs, frt, frt, sads, asd, 43rfw. asd";
 function wordsCounter(string){
-    let wordsArray = string.toLowerCase().split(" ");
-    let word = wordsArray[0];
+    let wordsArray = string.split(/[\s.,]+/gi);
     let counter = 0;
-    console.log(wordsArray);
-    for(let j = 0; j <= wordsArray.length - 1; j++){
-        word = wordsArray[j];
-        for(let i = 0; i <= wordsArray.length - 1; i++){
-            if(word == wordsArray[j]){
+    let word = wordsArray[0];
+    for(let i = 0; i < wordsArray.length; i++){
+        word = wordsArray[i];
+
+        for(let j = 0; j < wordsArray.length; j++){
+            if(word === wordsArray[j]){
                 counter++;
-                console.log(`word ${word} and ${counter}`);
-                break;
             }
-        }   
+        }
+
+        console.log(`${word} meets ${counter} times`);
+        counter = 0;
     }
-}
-wordsCounter(someStr);
+};
 
 //6) вывод чисел фибоначи + 
 function getFibonacciNumbers(amountNumbers){
@@ -131,6 +135,7 @@ class Triangle{
     #aSide;
     #bSide;
     #cSide;
+
     constructor(aSide, bSide, cSide){
         this.#aSide = aSide;
         this.#bSide = bSide;
@@ -233,10 +238,9 @@ function decToBin(number){
             strBit += nextNumber % 2;
         }
         else{
-            nextNumber = nextNumber - (nextNumber % 2);
+            nextNumber = nextNumber - (nextNumber % 1);
             strBit += nextNumber % 2;
         }
-
         nextNumber /= 2;
     }
     
@@ -244,9 +248,10 @@ function decToBin(number){
     for(let i = strBit.length - 2; i >= 0; i--){
         trueString += strBit.charAt(i);
     }
+
     return trueString;
 }
-decToBin(4);
+
 //12) 9-10 задания для двумерных массивов +
 Array.prototype.doubleEllemSum = function(compare){
     let sum = 0;
@@ -342,6 +347,7 @@ function getTransposeMatrix(matrix){
 
     return transposeMatrix;
 }
+
 //16 суммирование матриц +
 function sumMatrix(firstMatrix, secondMatrix){
 
@@ -364,7 +370,7 @@ function sumMatrix(firstMatrix, secondMatrix){
     }
 }
 
-//17) удаление строки если в ней есть 0
+//17) удаление строки если в ней есть нулевой элемент
 function dellMatrixRowWithZero(matrix){
     let rows = matrix.length;
     let collumns = matrix[0].length;
@@ -381,18 +387,20 @@ function dellMatrixRowWithZero(matrix){
     return matrix;
 }
 
+//удаление столбца, если есть нулевой элемент
 function dellMatrixCollumnWithZero(matrix){
     let rows = matrix.length;
     let collumns = matrix[0].length;
 
     for(let i = 0; i < rows; i++){
         for(let j = 0; j < collumns; j++){
-            if(matrix[j][j] === 0){
-                matrix[j].splice(j, 0);
-                collumns = matrix[0].length;
+            if(matrix[i][j] === 0){
+                matrix.splice(j, 0);
+                rows = matrix.length;
             }
         }
     }
+
     return matrix;
 }
 
@@ -402,28 +410,5 @@ let testMatrix = [
     [7,8,0],
 ];
 dellMatrixCollumnWithZero(testMatrix);
-
-//bind call
-function f(a,b,c){
-    return this.a + this.b + a + b + c;
-}
-let obj = {
-    a : 3,
-    b : 10,
-};
-
-let ff = f.bind(obj, 1, 4, 7);
-ff();
-
-function f1(a,b,c){
-    return this.a + this.b + a + b + c;
-}
-let obj1 = {
-    a : 3,
-    b : 10,
-};
-
-let ff1 = f1.call(obj, 1, 4, 7);
-ff1();
 
 

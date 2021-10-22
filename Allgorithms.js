@@ -1,4 +1,7 @@
-//сортировка
+//binary tree
+
+
+//bubble sort
 function bubbleSort(array){
     if(array instanceof Array){
         for(let i = 0; i < array.length; i++){
@@ -16,6 +19,7 @@ function bubbleSort(array){
 }
 bubbleSort([1,5,3,6,7,4,3,2,1,1,4,5,34,5,434,535,34,53,3,4,5,3]);
 
+//iselection sort
 function selectionSort(array){
     for(let i = 0; i < array.length; i++){
         let minValue = i;
