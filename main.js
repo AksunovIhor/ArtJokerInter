@@ -43,6 +43,7 @@ function numbersCount(number){
 
     return counter;
 }
+numbersCount(12345);
 
 //4) уникальные слова в предложении +/-
 function unicWords(string){

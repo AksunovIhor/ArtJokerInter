@@ -16,7 +16,18 @@ function getFactorial(){
 
         return number * result;
     }
-}
-let getfact = getFactorial();
-getfact(5);
+};
 
+//9) 
+function arrayEllemSum(array){
+    let cache = {};
+
+    /*return function memorize(array){
+        let result = cache[array];
+    }*/
+
+    let result = cache[array];
+    return result;
+};
+
+arrayEllemSum([1,2,3,4,5]);

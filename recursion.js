@@ -14,8 +14,9 @@ function numbersCount(number){
     let counter = 0;
     let numeral = 0;
 
-    if(number){
-        
+    if(number > 0){
+        numeral = numbersCount(number) % 10;
+        console.log(numeral);
     }
 }
 numbersCount(12345);
@@ -25,14 +26,14 @@ function fibonacciNumbers(amountNumbers){
     let fibNumbers = [0, 1];
 
     if(amountNumbers === 0 || amountNumbers === 1){
-        return fibNumbers;
+        return amountNumbers;
     }
     else{
 
     }
+
 }
 fibonacciNumbers(7);
-
 
 //8) факториал
 function getFactorial(){
@@ -48,8 +49,17 @@ function getFactorial(){
 function arrayEllemSum(array){
     let sum = 0;
 
-    if(array.length ){
-
+    if(array.length){
+        sum = array[0] + arrayEllemSum(array.slice(1));
     }
-}
+    
+    return sum;
+};
 
+//10)посчет элементов в массиве
+function arrayEllemSum(array){
+    let counter = 0;
+    let arrLen = array.length;
+
+};
+arrayEllemSum([1,2,3,4,5]);
