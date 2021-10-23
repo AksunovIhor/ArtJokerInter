@@ -18,16 +18,26 @@ function getFactorial(){
     }
 };
 
-//9) 
-function arrayEllemSum(array){
+//9) сумма элементов массива
+function arrayEllemSum(){
     let cache = {};
 
-    /*return function memorize(array){
+    return function memorize(array, i){
+        i = i || 0;
+
+        if(i >= array.length){
+            return 0;
+        }
+
         let result = cache[array];
-    }*/
+        if(result === undefined){
+            result = memorize(array, i + 1);
+            cache[array] = result;
+            console.log("memo");
+        }
 
-    let result = cache[array];
-    return result;
+        return array[i] + result;
+    }
 };
-
-arrayEllemSum([1,2,3,4,5]);
+let ae = arrayEllemSum();
+ae([1,2,3,4,5]);

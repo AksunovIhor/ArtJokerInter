@@ -347,7 +347,7 @@ function getTransposeMatrix(matrix){
     }
 
     return transposeMatrix;
-}
+};
 
 //16 суммирование матриц +
 function sumMatrix(firstMatrix, secondMatrix){
@@ -395,9 +395,8 @@ function dellMatrixCollumnWithZero(matrix){
 
     for(let i = 0; i < rows; i++){
         for(let j = 0; j < collumns; j++){
-            if(matrix[i][j] === 0){
-                matrix.splice(j, 0);
-                rows = matrix.length;
+            if(matrix[j][i] === 0){
+                matrix[i].splice(j);
             }
         }
     }
@@ -413,3 +412,24 @@ let testMatrix = [
 dellMatrixCollumnWithZero(testMatrix);
 
 
+
+function showMatrixColl(matrix){
+    let rows = matrix.length;
+    let coll = matrix[0].length;
+
+    for(let i = 0; i < rows; i++){
+        for(let j = 0; j < rows; j++){
+            if(matrix[i][j] === 0){
+                matrix[i].splice(j, coll);
+            }
+        }
+    }
+    return matrix;
+}
+let testMatrix = [
+    [1,0,3],
+    [4,5,6],
+    [7,8,0],
+];
+showMatrixColl(testMatrix);
+                
