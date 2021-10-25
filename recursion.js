@@ -1,25 +1,62 @@
 'use strict';
 
 //1) анаграмма
-function isAnnagramma(firstWord, secondWord){
+function isAnagramma(firstWord, secondWord, i, j){
+    i = i || 0;
+    j = j || 0;
+    let counter1 = 0;
+    let counter2 = 0;
+
     if(firstWord.length !== secondWord.length){
         return false;
     }
-
+    else{
+        let char1 = firstWord[i];
+    let char2 = firstWord[j];
+    if(char1 === char2){
+        counter1++;
+    }
+    char2 = secondWord[j];
+    if(char1 === char2){
+        counter2++;
+    }
+    isAnagramma(firstWord, secondWord, i++, j++);
+    }
+    
+    if(counter1 !== counter2){
+        return false;
+    }
+    return true;
     
 }
+isAnagramma("abc", "cba");
 
 //3) количество цифр в числе
 function numbersCount(number){
     let counter = 0;
     let numeral = 0;
 
-    if(number > 0){
-        numeral = numbersCount(number) % 10;
-        console.log(numeral);
+    if(number){
+        numeral = number % 10;
+        let result = numbersCount(number - numeral);
+        counsole.log(result);
+        number = result / 10;
+        counter++;
     }
+    return counter;
 }
-numbersCount(12345);
+numbersCount(123);
+
+function countDigits(n) {
+    let counter = 0;
+    for(let i = 0; n > 1; i++) {
+       n /= 10;
+       console.log(n);
+       counter++;
+    }
+    return counter;
+ };
+ countDigits(123455);
 
 //6) числа фибоначи
 function fibonacciNumbers(amountNumbers, i){
@@ -43,7 +80,7 @@ function fibonacciNumbers(amountNumbers, i){
 fibonacciNumbers(7);
 
 //8) факториал
-function getFactorial(){
+function getFactorial(number){
     if(number == 0 || number == 1) {
         return number;
     }
@@ -65,20 +102,36 @@ function arrayEllemSum(array, i){
         return array[i] + sum;
     }
 };
-arrayEllemSum([1,2,3,4,5,6,7,8,9,10]);
+
+/*Array.prototype.ellemSum = function(compare, i){
+    let sum = 0;
+    i = i || 0;
+
+    if(i >= this.length){
+        return 0;
+    }
+
+    if(compare(this[i])){
+        sum = compare(this[i], i + 1);
+        return this[i] + sum;
+    }
+}
+let arr = [1,2,3,4,5,6,7,8,9,10];
+arr.ellemSum(() => ({}));*/
+
 
 //10)посчет элементов в массиве
 function arrayEllemCount(array, i){
     let counter = 0;
     i = i || 0;
 
-    if(counter >= array.length){
-        return 0;
-    }
-    else{
-        arrayEllemCount(array, i + 1);
-        counter++;
-        return counter;
+    if(array instanceof Array){
+        if(counter >= array.length){
+            return 0;
+        }
+        else{
+            
+        }
     }
 
 };
