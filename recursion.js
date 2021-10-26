@@ -6,29 +6,8 @@ function isAnagramma(firstWord, secondWord, i, j){
     j = j || 0;
     let counter1 = 0;
     let counter2 = 0;
-
-    if(firstWord.length !== secondWord.length){
-        return false;
-    }
-    else{
-        let char1 = firstWord[i];
-    let char2 = firstWord[j];
-    if(char1 === char2){
-        counter1++;
-    }
-    char2 = secondWord[j];
-    if(char1 === char2){
-        counter2++;
-    }
-    isAnagramma(firstWord, secondWord, i++, j++);
-    }
     
-    if(counter1 !== counter2){
-        return false;
-    }
-    return true;
-    
-}
+};
 isAnagramma("abc", "cba");
 
 //3) количество цифр в числе
@@ -38,58 +17,59 @@ function numbersCount(number){
 
     if(number){
         numeral = number % 10;
-        let result = numbersCount(number - numeral);
-        counsole.log(result);
-        number = result / 10;
+        counter++;
+        numbersCount((number - numeral) / 10);
+    }
+    return counter;
+    
+}
+numbersCount(1234567);
+
+//4) Уникальные слова в предложении
+function uniqWords(string, i, j){
+    i = i || 0;
+    j = j || 0;
+    let counter = 0;
+    let uniqWordsCounter = 0;
+    let wordsArray = string.split(/[\s.,]+/gi);
+
+    if(i >= wordsArray.length && j >= wordsArray.length){
+        return false;
+    }
+
+    let word = wordsArray[i];
+    if(word === wordsArray[j]){
+        word === wordsArray[j];
         counter++;
     }
     return counter;
 }
-numbersCount(123);
+uniqWords("asdsf, sdf, sdf, sdf, sdf,wrwe, wr, wer,w fd,");
 
-function countDigits(n) {
-    let counter = 0;
-    for(let i = 0; n > 1; i++) {
-       n /= 10;
-       console.log(n);
-       counter++;
-    }
-    return counter;
- };
- countDigits(123455);
-
-//6) числа фибоначи
-function fibonacciNumbers(amountNumbers, i){
-    let fibNumbers = [0, 1];
-    i = i || 2;
-
-    if(amountNumbers === 0 || amountNumbers === 1){
-        return amountNumbers;
-    }
-    
-    if(i >= amountNumbers){
-        return 0;
-    }
-    else{
-        let res = fibonacciNumbers(amountNumbers, i + 1);
-        fibNumbers.push(res + fibNumbers[i - 1]);
-        return fibNumbers;
+//6) числа фибоначи +
+function getFibonacciNumbers(amountNumbers){
+    if(amountNumbers <= 2){
+        return [0, 1];
     }
 
+    let fibonacciNumbers = getFibonacciNumbers(amountNumbers - 1);
+
+    fibonacciNumbers.push(fibonacciNumbers[fibonacciNumbers.length - 1] + fibonacciNumbers[fibonacciNumbers.length - 2]);
+
+    return fibonacciNumbers;
 }
-fibonacciNumbers(7);
+getFibonacciNumbers(7);
 
-//8) факториал
+//8) факториал +
 function getFactorial(number){
     if(number == 0 || number == 1) {
         return number;
     }
-    else {
-        return number * getFactorial(number - 1);
-    }
+    
+    return number * getFactorial(number - 1); 
 }
 
-//9) сумма элементов массива
+//9) сумма элементов массива +/-
 function arrayEllemSum(array, i){
     let sum = 0;
     i = i || 0;
@@ -97,10 +77,10 @@ function arrayEllemSum(array, i){
     if(i >= array.length){
         return 0;
     }
-    else{
-        sum = arrayEllemSum(array, i + 1);
-        return array[i] + sum;
-    }
+
+    sum = arrayEllemSum(array, i + 1);
+
+    return array[i] + sum;
 };
 
 /*Array.prototype.ellemSum = function(compare, i){

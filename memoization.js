@@ -1,14 +1,38 @@
 'use strict';
 
+//6) числа фибоначи
+function getFibonacciNumbers(){
+    let cache = {};
+
+    return function memorize(amountNumbers){       
+        if(amountNumbers <= 2){
+            return [0, 1];
+        }
+
+        let result = cache[amountNumbers];
+        if(result === undefined){
+            result = memorize(amountNumbers - 1);
+            cache[amountNumbers] = result;
+            console.log(cache);
+        }
+
+        return result;
+    }
+}
+let gfn = getFibonacciNumbers();
+gfn(7);
+
 //8) факториал
 function getFactorial(){
     let cache = {};
+
     return function memorize(number){
         if(number === 0 || number === 1){
             return number;
         }
         
         let result = cache[number];
+
         if(result === undefined){
             result = memorize(number - 1);
             cache[number] = result;
@@ -33,11 +57,9 @@ function arrayEllemSum(){
         if(result === undefined){
             result = memorize(array, i + 1);
             cache[array] = result;
-            console.log("memo");
         }
-
         return array[i] + result;
     }
+
+    
 };
-let ae = arrayEllemSum();
-ae([1,2,3,4,5]);

@@ -12,10 +12,12 @@ function isAnagramma(firstWord, secondWord) {
         let counter2 = 0;
         for (let j = 0; j < secondWord.length; j++) {
             let char2 = firstWord[j];
+            
             if (char1 === char2) {
                 counter1++;
             };
             char2 = secondWord[j];
+            console.log(`${char1} --- ${char2}`);
             if (char1 === char2) {
                 counter2++;
             };
@@ -29,6 +31,7 @@ function isAnagramma(firstWord, secondWord) {
 
     return true;
 }
+isAnagramma("abc", "bca");
 
 //3) количество цифр в числе + 
 function numbersCount(number){
@@ -48,8 +51,8 @@ numbersCount(12345);
 //4) уникальные слова в предложении +
 function uniqWords(string){
     let counter = 0;
-    let wordsArray = string.split(/[\s.,]+/gi);
     let uniqWordsCounter = 0;
+    let wordsArray = string.split(/[\s.,]+/gi);
 
     for(let i = 0; i < wordsArray.length; i++){
         let word = wordsArray[i];
@@ -93,23 +96,25 @@ wordsCounter(testString);
 
 //6) вывод чисел фибоначи + 
 function getFibonacciNumbers(amountNumbers){
-    let fibNumbers = [0, 1];
+    let fibonacciNumbers = [0, 1];
 
     for(let i = 2; i < amountNumbers; i++){
-        fibNumbers.push(fibNumbers[i - 1] + fibNumbers[i - 2]);
+        fibonacciNumbers.push(fibonacciNumbers[i - 1] + fibonacciNumbers[i - 2]);
     }
 
-    return fibNumbers;
+    return fibonacciNumbers;
 }
 
 //7)площадь и периметр круга, треугольника, квадрата + 
 class Rectangle{
     #width;
     #height;
+
     constructor(width, height){
         this.#width = width;
         this.#height = height;
     }
+    
     /** 
      * @param {number} valueWidth
      */
