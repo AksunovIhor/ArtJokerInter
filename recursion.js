@@ -1,50 +1,59 @@
 'use strict';
 
 //1) анаграмма
-function isAnagramma(firstWord, secondWord, i, j){
+function isAnagram(firstWord, secondWord, i, j, counter1, counter2){
     i = i || 0;
     j = j || 0;
-    let counter1 = 0;
-    let counter2 = 0;
-    
-};
-isAnagramma("abc", "cba");
+    counter1 = counter1 || 0;
+    counter2 = counter2 || 0;
 
-//3) количество цифр в числе
-function numbersCount(number){
-    let counter = 0;
+    if(i < firstWord.length){
+        let char1 = firstWord[i];
+        if(j < secondWord.length){
+            let char2 = firstWord[j];
+            console.log(char1, char2);
+            isAnagram(firstWord, secondWord, i, ++j, counter1, counter2);
+        }
+        
+        isAnagram(firstWord, secondWord, ++i, j, counter1, counter2);
+    }
+    return true;
+};
+isAnagram("abcd", "dcba");
+
+//3) количество цифр в числе + 
+function numbersCount(number, counter){
+    counter = counter || 0;
     let numeral = 0;
 
     if(number){
         numeral = number % 10;
-        counter++;
-        numbersCount((number - numeral) / 10);
+        return numbersCount((number - numeral) / 10, ++counter);
+    }
+
+    return counter;
+}
+
+//4) Уникальные слова в предложении
+function uniqWords(string, i, j, counter){
+    i = i || 0;
+    j = j || 0;
+    counter = counter || 0;
+    let uniqWordsCounter = 0;
+    let wordsArray = string.split(/[\s.,]+/gi);
+
+    if(i < wordsArray.length && j < wordsArray.length){
+        let word = wordsArray[i];
+        if(word !== wordsArray[j]){
+            ++counter;
+            console.log(word, wordsArray[j], counter);
+        }
+        return uniqWords(string, ++i, ++j, counter);
     }
     return counter;
     
 }
-numbersCount(1234567);
-
-//4) Уникальные слова в предложении
-function uniqWords(string, i, j){
-    i = i || 0;
-    j = j || 0;
-    let counter = 0;
-    let uniqWordsCounter = 0;
-    let wordsArray = string.split(/[\s.,]+/gi);
-
-    if(i >= wordsArray.length && j >= wordsArray.length){
-        return false;
-    }
-
-    let word = wordsArray[i];
-    if(word === wordsArray[j]){
-        word === wordsArray[j];
-        counter++;
-    }
-    return counter;
-}
-uniqWords("asdsf, sdf, sdf, sdf, sdf,wrwe, wr, wer,w fd,");
+uniqWords("asdsf, sdf, sdf, sdf, sdf,wrwe, wr, wer,w fd");
 
 //6) числа фибоначи +
 function getFibonacciNumbers(amountNumbers){
@@ -102,17 +111,6 @@ arr.ellemSum(() => ({}));*/
 
 //10)посчет элементов в массиве
 function arrayEllemCount(array, i){
-    let counter = 0;
-    i = i || 0;
-
-    if(array instanceof Array){
-        if(counter >= array.length){
-            return 0;
-        }
-        else{
-            
-        }
-    }
-
+    
 };
 arrayEllemCount([1,2,3,4,5]);

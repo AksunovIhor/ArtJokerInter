@@ -1,7 +1,7 @@
 'use strict';
 
 //1) Анаграмма + 
-function isAnagramma(firstWord, secondWord) {
+function isAnagram(firstWord, secondWord) {
     if (firstWord.length !== secondWord.length) {
         return false;
     };
@@ -16,8 +16,9 @@ function isAnagramma(firstWord, secondWord) {
             if (char1 === char2) {
                 counter1++;
             };
+
             char2 = secondWord[j];
-            console.log(`${char1} --- ${char2}`);
+
             if (char1 === char2) {
                 counter2++;
             };
@@ -31,7 +32,6 @@ function isAnagramma(firstWord, secondWord) {
 
     return true;
 }
-isAnagramma("abc", "bca");
 
 //3) количество цифр в числе + 
 function numbersCount(number){
