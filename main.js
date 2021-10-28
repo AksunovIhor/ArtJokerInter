@@ -31,22 +31,34 @@ function isAnagram(firstWord, secondWord) {
     };
 
     return true;
-}
+};
 
 //3) количество цифр в числе + 
-function numbersCount(number){
-    let counter = 0;
-    let numeral = 0;
+function getNumeralsCounter(number){
+    let arrCreator = number;
+    let numArr = [];
+    let numeralMap = {};
 
-    while(number) {
-        numeral = number % 10;
-        number = (number - numeral) / 10;
-        counter++;
-    };
+    while(arrCreator){
+        let num = arrCreator % 10;
+        arrCreator = (arrCreator - num) / 10;
+        numArr.unshift(num);
+    }
+    
+    for(let i = 0; i < numArr.length; i++){
+        let numeral = numArr[i];
+        let counter = 0;
 
-    return counter;
-}
-numbersCount(12345);
+        for(let j = 0; j < numArr.length; j++){
+            if(numeral === numArr[j]){
+                counter++;
+            }
+            numeralMap[numeral] = counter;
+        }
+    }
+    return numeralMap;
+};
+getNumeralsCounter(1223456);
 
 //4) уникальные слова в предложении +
 function uniqWords(string){
@@ -71,13 +83,14 @@ function uniqWords(string){
     }
 
     return uniqWordsCounter;
-}
+};
 
 //5) вхождение каждого слова в строку +
 function wordsCounter(string){
     let wordsArray = string.split(/[\s.,]+/gi);
     let counter = 0;
-    let uniqWordsMap = new Map();
+    let uniqWordsObject = {};
+
     for(let i = 0; i < wordsArray.length; i++){
         let word = wordsArray[i];
 
@@ -86,10 +99,10 @@ function wordsCounter(string){
                 counter++;
             }
         }
-        uniqWordsMap.set(word, counter);
+        uniqWordsObject[word] = counter;
         counter = 0;
     }
-    return uniqWordsMap;
+    return uniqWordsObject;
 };
 let testString = "frt, ad, asd, rwefs, frt, frt, sads, asd, 43rfw. asd";
 wordsCounter(testString);
@@ -103,7 +116,7 @@ function getFibonacciNumbers(amountNumbers){
     }
 
     return fibonacciNumbers;
-}
+};
 
 //7)площадь и периметр круга, треугольника, квадрата + 
 class Rectangle{
@@ -378,46 +391,36 @@ function sumMatrix(firstMatrix, secondMatrix){
     }
 }
 
-//17) удаление строки если в ней есть нулевой элемент
+//17) удаление строки если в ней есть нулевой элемент + 
 function dellMatrixRowWithZero(matrix){
-    let matrixLength = matrix.length;
-    let coll = matrix[0].length;
 
-    for(let i = 0; i < matrixLength; i++){
-        for(let j = 0; j < coll; j++){
+    for(let i = 0; i < matrix.length; i++){
+        for(let j of matrix[i]){
+            if(j == 0){
+                matrix.splice(i, 1);
+                i--;
+            }
+        }
+    }
+
+    return matrix;
+}
+
+//удаление столбца, если есть нулевой элемент + 
+function dellMatrixCollumnWithZero(matrix){
+    for(let i = 0; i < matrix.length; i++){
+        for(let j = 0; j < matrix[i].length; j++){
 
             if(matrix[i][j] === 0){
-                matrix.splice(i, j);
-                
+               let index = matrix[i].indexOf(matrix[i][j]);
+
+               for(let k = 0; k < matrix.length; k++){
+                   matrix[k].splice(index, 1);
+               }
             }
-        }
-        matrixLength = matrix.length;
-        coll = matrix[0].length;
-    }
-    return matrix;
-}
 
-let testMatrix = [
-    [1,0,3],
-    [4,0,6],
-    [7,8,0],
-];
-dellMatrixRowWithZero(testMatrix);
-
-//удаление столбца, если есть нулевой элемент
-function dellMatrixCollumnWithZero(matrix){
-    let rows = matrix.length;
-    let collumns = matrix[0].length;
-
-    for(let i = 0; i < rows; i++){
-        for(let j = 0; j < collumns; j++){
-            if(matrix[j][i] === 0){
-                matrix[i].splice(j);
-            }
         }
     }
 
     return matrix;
-}
-
-                
+};

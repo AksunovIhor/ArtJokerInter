@@ -1,7 +1,7 @@
 'use strict';
 
 //3) количество цифр в числе
-function numbersCount(number, counter){
+function numbersCount(number){
     counter = counter || 0;
     let numeral = 0;
 

@@ -7,32 +7,39 @@ function isAnagram(firstWord, secondWord, i, j, counter1, counter2){
     counter1 = counter1 || 0;
     counter2 = counter2 || 0;
 
-    if(i < firstWord.length){
-        let char1 = firstWord[i];
-        if(j < secondWord.length){
-            let char2 = firstWord[j];
-            console.log(char1, char2);
-            isAnagram(firstWord, secondWord, i, ++j, counter1, counter2);
-        }
-        
-        isAnagram(firstWord, secondWord, ++i, j, counter1, counter2);
-    }
-    return true;
+    
 };
 isAnagram("abcd", "dcba");
 
-//3) количество цифр в числе + 
-function numbersCount(number, counter){
+//3) количество каждой цифры в числе + 
+function getNumeralsCounter(number, counter){
     counter = counter || 0;
-    let numeral = 0;
+    let arrayCreator = number;
+    let numeralsArray = [];
+    let numeralsArayCounter = {};
 
-    if(number){
-        numeral = number % 10;
-        return numbersCount((number - numeral) / 10, ++counter);
+    while(arrayCreator){
+        let numeral = arrayCreator % 10;
+        arrayCreator = (arrayCreator - numeral) / 10;
+        numeralsArray.unshift(numeral);
+    }
+    
+
+    for(let i = 0; i < numeralsArray.length; i++){
+        if(counter <= i){
+            let numeral = numeralsArray[i];
+
+            if(numeral === numeralsArray[i]){
+                getNumeralsCounter(number, ++counter);
+            }
+            numeralsArayCounter[numeral] = counter;
+        }
+        counter = 0;
     }
 
-    return counter;
+    return numeralsArayCounter;
 }
+getNumeralsCounter(1123345544445);
 
 //4) Уникальные слова в предложении
 function uniqWords(string, i, j, counter){
