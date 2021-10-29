@@ -39,7 +39,7 @@ function getNumeralsCounter(number, counter){
 
     return numeralsArayCounter;
 }
-getNumeralsCounter(1123345544445);
+getNumeralsCounter(94503247411);
 
 //4) Уникальные слова в предложении
 function uniqWords(string, i, j, counter){

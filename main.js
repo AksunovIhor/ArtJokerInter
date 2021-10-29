@@ -58,7 +58,6 @@ function getNumeralsCounter(number){
     }
     return numeralMap;
 };
-getNumeralsCounter(1223456);
 
 //4) уникальные слова в предложении +
 function uniqWords(string){
@@ -104,8 +103,6 @@ function wordsCounter(string){
     }
     return uniqWordsObject;
 };
-let testString = "frt, ad, asd, rwefs, frt, frt, sads, asd, 43rfw. asd";
-wordsCounter(testString);
 
 //6) вывод чисел фибоначи + 
 function getFibonacciNumbers(amountNumbers){
