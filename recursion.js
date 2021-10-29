@@ -7,6 +7,32 @@ function isAnagram(firstWord, secondWord, i, j, counter1, counter2){
     counter1 = counter1 || 0;
     counter2 = counter2 || 0;
 
+    if(firstWord.length !== secondWord.length){
+        return false;
+    }
+
+    if(i < firstWord.length){
+        let c1 = firstWord[i];
+        if(j < firstWord.length){
+            let c2 = firstWord[j];
+            if(c1 === c2){
+                ++counter1;
+            }
+            isAnagram(firstWord, secondWord, i, ++j, counter1, counter2);
+
+            c2 = secondWord[j];
+            if(c1 === c2){
+                ++counter2;
+            }
+        }
+        isAnagram(firstWord, secondWord, ++i, j, counter1, ++counter2);
+        
+        if(counter1 !== counter2){
+            return false;
+        }
+    }
+    
+    return true;
     
 };
 isAnagram("abcd", "dcba");
@@ -24,9 +50,8 @@ function getNumeralsCounter(number, counter){
         numeralsArray.unshift(numeral);
     }
     
-
-    for(let i = 0; i < numeralsArray.length; i++){
-        if(counter <= i){
+    for(let i = numeralsArray.length; i > 0; i--){
+        if(i !== 0){
             let numeral = numeralsArray[i];
 
             if(numeral === numeralsArray[i]){
@@ -34,7 +59,6 @@ function getNumeralsCounter(number, counter){
             }
             numeralsArayCounter[numeral] = counter;
         }
-        counter = 0;
     }
 
     return numeralsArayCounter;

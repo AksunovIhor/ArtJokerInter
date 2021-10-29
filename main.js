@@ -22,7 +22,7 @@ function isAnagram(firstWord, secondWord) {
             if (char1 === char2) {
                 counter2++;
             };
-
+            console.log(char1, char2);
         };
 
         if (counter1 !== counter2) {
@@ -34,29 +34,30 @@ function isAnagram(firstWord, secondWord) {
 };
 
 //3) количество цифр в числе + 
-function getNumeralsCounter(number){
+function getDigitsCount(number){
     let arrCreator = number;
-    let numArr = [];
-    let numeralMap = {};
+    let digitsArray = [];
+    let digitsArrayCount = {};
 
     while(arrCreator){
-        let num = arrCreator % 10;
-        arrCreator = (arrCreator - num) / 10;
-        numArr.unshift(num);
+        let tempNumber = arrCreator % 10;
+        arrCreator = (arrCreator - tempNumber) / 10;
+        digitsArray.unshift(tempNumber);
     }
     
-    for(let i = 0; i < numArr.length; i++){
-        let numeral = numArr[i];
+    for(let i = 0; i < digitsArray.length; i++){
+        let digit = digitsArray[i];
         let counter = 0;
 
-        for(let j = 0; j < numArr.length; j++){
-            if(numeral === numArr[j]){
+        for(let j = 0; j < digitsArray.length; j++){
+            if(digit === digitsArray[j]){
                 counter++;
             }
-            numeralMap[numeral] = counter;
+            digitsArrayCount[digit] = counter;
         }
     }
-    return numeralMap;
+
+    return digitsArrayCount;
 };
 
 //4) уникальные слова в предложении +
@@ -64,25 +65,25 @@ function uniqWords(string){
     let counter = 0;
     let uniqWordsCounter = 0;
     let wordsArray = string.split(/[\s.,]+/gi);
-
+    console.log(wordsArray);
     for(let i = 0; i < wordsArray.length; i++){
-        let word = wordsArray[i];
-
+        
         for(let j = 0; j < wordsArray.length; j++){
-            if(word === wordsArray[j]){
+            
+            if(wordsArray[i] === wordsArray[j]){
                 counter++;
             }
         }
 
-        if(counter === 1){
+        if(counter < 2 && counter > 0){
             uniqWordsCounter++;
         }
-
         counter = 0;
     }
-
+    
     return uniqWordsCounter;
 };
+uniqWords("sre, re, re, re, re, sre, gfd, gdf, fswe, dfgfd");
 
 //5) вхождение каждого слова в строку +
 function wordsCounter(string){
@@ -99,7 +100,7 @@ function wordsCounter(string){
             }
         }
         uniqWordsObject[word] = counter;
-        counter = 0;
+        //counter = 0;
     }
     return uniqWordsObject;
 };
