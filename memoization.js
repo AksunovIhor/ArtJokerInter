@@ -101,7 +101,5 @@ function arrayEllemSum(){
             cache[array] = result;
         }
         return array[i] + result;
-    }
-
-    
-};
+    };
+}

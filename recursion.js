@@ -12,7 +12,7 @@ function isAnagram(firstWord, secondWord, iIndex, jIndex, counter1, counter2){
     }
 
     if(iIndex < firstWord.length){
-        let char1 = iIndex;
+        let char1 = 1;
     }
     
     return true;
@@ -106,7 +106,23 @@ function arrayEllemSum(array, i){
     sum = arrayEllemSum(array, i + 1);
 
     return array[i] + sum;
+}
+
+Array.prototype.arrayEllemSum = function(compare, index){
+    index = index || 0;
+    let sum = 0;
+
+    if(index >= this.length){
+        return 0;
+    }
+
+    if(compare(this[index])){
+        sum = arrayEllemSum(this, index + 1);
+        return this[index] + sum; 
+    }
 };
+let ta = [1,2,3,4,5,6,7,8,9,10];
+ta.arrayEllemSum(() => ({}));
 
 /*Array.prototype.ellemSum = function(compare, i){
     let sum = 0;
