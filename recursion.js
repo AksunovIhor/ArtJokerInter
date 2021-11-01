@@ -1,9 +1,9 @@
 'use strict';
 
 //1) анаграмма
-function isAnagram(firstWord, secondWord, i, j, counter1, counter2){
-    i = i || 0;
-    j = j || 0;
+function isAnagram(firstWord, secondWord, iIndex, jIndex, counter1, counter2){
+    iIndex = iIndex || 0;
+    jIndex = jIndex || 0;
     counter1 = counter1 || 0;
     counter2 = counter2 || 0;
 
@@ -11,25 +11,8 @@ function isAnagram(firstWord, secondWord, i, j, counter1, counter2){
         return false;
     }
 
-    if(i < firstWord.length){
-        let c1 = firstWord[i];
-        if(j < firstWord.length){
-            let c2 = firstWord[j];
-            if(c1 === c2){
-                ++counter1;
-            }
-            isAnagram(firstWord, secondWord, i, ++j, counter1, counter2);
-
-            c2 = secondWord[j];
-            if(c1 === c2){
-                ++counter2;
-            }
-        }
-        isAnagram(firstWord, secondWord, ++i, j, counter1, ++counter2);
-        
-        if(counter1 !== counter2){
-            return false;
-        }
+    if(iIndex < firstWord.length){
+        let char1 = iIndex;
     }
     
     return true;
@@ -93,8 +76,10 @@ function getFibonacciNumbers(amountNumbers){
     }
 
     let fibonacciNumbers = getFibonacciNumbers(amountNumbers - 1);
+    let prevNumber = fibonacciNumbers.length - 1;
+    let nextNumber = fibonacciNumbers.length - 2;
 
-    fibonacciNumbers.push(fibonacciNumbers[fibonacciNumbers.length - 1] + fibonacciNumbers[fibonacciNumbers.length - 2]);
+    fibonacciNumbers.push(fibonacciNumbers[prevNumber] + fibonacciNumbers[nextNumber]);
 
     return fibonacciNumbers;
 }

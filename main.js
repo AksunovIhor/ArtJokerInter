@@ -103,7 +103,7 @@ function wordsCounter(string){
         //counter = 0;
     }
     return uniqWordsObject;
-};
+}
 
 //6) вывод чисел фибоначи + 
 function getFibonacciNumbers(amountNumbers){
