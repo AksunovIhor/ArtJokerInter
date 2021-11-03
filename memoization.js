@@ -15,12 +15,10 @@ function isAnagram() {
         }
 
         if ( firsWordArray.length !== secondWordArray.length ) {
-            console.log("cached");
             return cache[firstWord + secondWord] = false;
         }
 
         if ( firsWordArray.toString() === secondWordArray.toString() ) {
-            console.log("cached");
             return cache[firstWord + secondWord] = true;
         } else {
             if ( firsWordArray[counter1] === secondWordArray[counter2] || counter2 > secondWordArray.length ) {
