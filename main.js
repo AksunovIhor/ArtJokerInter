@@ -271,13 +271,13 @@ function decToBin(number){
         nextNumber /= 2;
     }
     
-    let trueString = "";
-    for(let i = strBit.length - 2; i >= 0; i--){
-        trueString += strBit.charAt(i);
+    let reverseString = "";
+    for ( let i = strBit.length - 2; i >= 0; i-- ) {
+        reverseString += strBit.charAt(i);
     }
 
-    return trueString;
-};
+    return reverseString;
+}
 
 //12) 9-10 задания для двумерных массивов
 Array.prototype.doubleEllemSum = function(compare){
@@ -294,7 +294,7 @@ Array.prototype.doubleEllemSum = function(compare){
     return sum;
 };
 
-Array.prototype.doubleEllemCounter = function(compare){
+Array.prototype.doubleEllemCount = function(compare){
     let counter = 0;
 
     for ( let i = 0; i < this.length; i++ ) {
@@ -309,7 +309,7 @@ Array.prototype.doubleEllemCounter = function(compare){
     return counter;
 };
 
-//13) summ min for max
+//13) сумма от минимального до максимального значений
 function sumMinToMax(minNumber, maxNumber, compare){
     let sum = 0;
 
@@ -322,6 +322,7 @@ function sumMinToMax(minNumber, maxNumber, compare){
             sum += i;
         }
     }
+
     return sum;
 }
 
@@ -401,7 +402,7 @@ function dellMatrixRowWithZero(matrix){
 
     for ( let i = 0; i < matrix.length; i++ ) {
         for ( let j of matrix[i] ) {
-            if ( j == 0 ) {
+            if ( j === 0 ) {
                 matrix.splice(i, 1);
                 i--;
             }
@@ -412,7 +413,7 @@ function dellMatrixRowWithZero(matrix){
 }
 
 //удаление столбца, если есть нулевой элемент
-function dellMatrixCollumnWithZero(matrix){
+function dellMatrixCollumnWithZero(matrix) {
     for ( let i = 0; i < matrix.length; i++ ) {
         for ( let j = 0; j < matrix[i].length; j++ ) {
             if ( matrix[i][j] === 0 ) {
