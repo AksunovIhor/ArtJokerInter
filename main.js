@@ -2,30 +2,30 @@
 
 //1) Анаграмма + 
 function isAnagram(firstWord, secondWord) {
-    if (firstWord.length !== secondWord.length) {
+    if ( firstWord.length !== secondWord.length ) {
         return false;
     }
     
-    for (let i = 0; i < firstWord.length; i++) {
+    for ( let i = 0; i < firstWord.length; i++ ) {
         let char1 = firstWord[i];
         let counter1 = 0;
         let counter2 = 0;
         
-        for (let j = 0; j < secondWord.length; j++) {
+        for ( let j = 0; j < secondWord.length; j++ ) {
             let char2 = firstWord[j];
             
-            if (char1 === char2) {
+            if ( char1 === char2 ) {
                 counter1++;
             }
 
             char2 = secondWord[j];
 
-            if (char1 === char2) {
+            if ( char1 === char2 ) {
                 counter2++;
             }
         }
 
-        if (counter1 !== counter2) {
+        if ( counter1 !== counter2 ) {
             return false;
         }
     }
@@ -37,7 +37,7 @@ const isAnagramES6Standart = (firstWord, secondWord) => [...firstWord.toLowerCas
 [...secondWord.toLowerCase()].sort().toString();
 
 //3) количество цифр в числе +
-function creatDigitsArray(number){
+function creatDigitsArray(number) {
     let digitsArray = [];
 
     while ( number ) {
@@ -49,16 +49,16 @@ function creatDigitsArray(number){
     return digitsArray;
 }
 
-function getDigitsCount(number){
-    let digitsArray = creatDigitsArray(number);
+function getCountDigits(number) {
+    let digitsArray = creatArrayDigits(number);
     let result = {};
 
-    for(let i = 0; i < digitsArray.length; i++){
+    for ( let i = 0; i < digitsArray.length; i++ ) {
         let digit = digitsArray[i];
         let counter = 0;
 
-        for(let j = 0; j < digitsArray.length; j++){
-            if(digit === digitsArray[j]){
+        for ( let j = 0; j < digitsArray.length; j++ ) {
+            if ( digit === digitsArray[j] ) {
                 counter++;
             }
             result[digit] = counter;
@@ -69,7 +69,7 @@ function getDigitsCount(number){
 }
 
 //4) уникальные слова в предложении +
-function uniqWords(string){
+function getCountUniqWords(string){
     let counter = 0;
     let uniqWordsCounter = 0;
     let wordsArray = string.split(/[\s.,]+/gi);
@@ -91,7 +91,7 @@ function uniqWords(string){
 }
 
 //5) вхождение каждого слова в строку +
-function getWordsQuantity(string){
+function getQuantityOfEachWords(string){
     let wordsArray = string.split(/[\s.,]+/gi);
     let counter = 0;
     let uniqWordsObject = {};
@@ -114,7 +114,7 @@ function getWordsQuantity(string){
 
 //6) вывод чисел фибоначи + 
 function getFibonacciNumbers(amountNumbers){
-    let fibonacciNumbers = [0, 1];
+    let fibonacciNumbers = [0, 1].splice(0, amountNumbers);
 
     for ( let i = 2; i < amountNumbers; i++ ) {
         fibonacciNumbers.push(fibonacciNumbers[i - 1] + fibonacciNumbers[i - 2]);
@@ -134,24 +134,24 @@ class Rectangle{
     }
     
     /** 
-     * @param {number} valueWidth
+     * @param {number} width
      */
-    set setWidth(valueWidth){
-        this.#width = valueWidth;
+    set setWidth(width){
+        this.#width = width;
     }
     
     /**
-     * @param {number} valueHeight
+     * @param {number} height
     */
-    set setHeight(valueHeight){
-        this.#height = valueHeight;
+    set setHeight(height){
+        this.#height = height;
     }
 
-    get getRectangleSquare(){
+    square(){
         return this.#width * this.#height;
     }
 
-    get getRectanglePerimeter(){
+    perimeter(){
         return (this.#width + this.#height) * 2;
     }
 }
@@ -168,29 +168,33 @@ class Triangle{
     }
 
     /**
-     * @param {number} value
+     * @param {number} aSide
     */
-    set setASide(value){
-        this.#aSide = value;
+    set aSide(aSide){
+        this.#aSide = aSide;
     }
 
     /**
-     * @param {number} value
+     * @param {number} bSide
      */
-    set setBSide(value){
-        this.#bSide = value;
+    set bSide(bSide){
+        this.#bSide = bSide;
     }
 
     /**
-     * @param {number} value
+     * @param {number} cSide
     */
-    set setCSide(value){
-        this.#cSide = value;
+    set cSide(cSide){
+        this.#cSide = cSide;
     }
 
-    get getTriangleSquare(){
+    square(){
         let halfPerimeter = (this.#aSide + this.#bSide + this.#cSide) / 2;
         return Math.sqrt(halfPerimeter * (halfPerimeter - this.#aSide) * (halfPerimeter - this.#bSide) * (halfPerimeter - this.#cSide));
+    }
+
+    perimeter() {
+        return this.#aSide + this.#bSide + this.#cSide;
     }
 }
 
@@ -202,17 +206,17 @@ class Circle{
     }
 
     /**
-     * @param {number} value
+     * @param {number} radius
      */
-    set setRadius(value){
-        this.#radius = value;
+    set setRadius(radius){
+        this.#radius = radius;
     }
 
-    get getCircleSquare(){
+    square(){
         return Math.PI * (this.#radius * this.#radius);
     }
 
-    get getCirclePerimeter(){
+    perimeter(){
         return 2 * Math.PI * this.#radius;
     }
 }
@@ -229,11 +233,11 @@ function getFactorial(number){
 }
 
 //9) сумма элементов массива
-Array.prototype.ellemSum = function(compare) {
+Array.prototype.getSumEllements = function(compare) {
     let sum = 0;
 
     for ( let i  = 0; i < this.length; i++ ) {
-        if(compare(this[i])){
+        if ( compare(this[i]) ) {
             sum += this[i];
         }
     }
@@ -242,7 +246,7 @@ Array.prototype.ellemSum = function(compare) {
 };
 
 //10) подсчет элементов в массиве
-Array.prototype.ellemCounter = function(compare){
+Array.prototype.getQuantityEllements = function(compare) {
     let counter = 0;
 
     for ( let i = 0; i < this.length; i++ ) {
@@ -255,7 +259,7 @@ Array.prototype.ellemCounter = function(compare){
 };
 
 //11) десятичное в двоичное
-function decToBin(number){
+function convertDecimalToBinnary(number) {
     let strBit = "";
     let nextNumber = number;
 
@@ -265,7 +269,7 @@ function decToBin(number){
             strBit += nextNumber % 2;
         }
         else{
-            nextNumber = nextNumber - (nextNumber % 1);
+            nextNumber -= nextNumber % 1;
             strBit += nextNumber % 2;
         }
         nextNumber /= 2;
@@ -280,7 +284,7 @@ function decToBin(number){
 }
 
 //12) 9-10 задания для двумерных массивов
-Array.prototype.doubleEllemSum = function(compare){
+Array.prototype.getSumEllementsOfMatrix = function(compare) {
     let sum = 0;
 
     for ( let i = 0; i < this.length; i++ ) {
@@ -294,7 +298,7 @@ Array.prototype.doubleEllemSum = function(compare){
     return sum;
 };
 
-Array.prototype.doubleEllemCount = function(compare){
+Array.prototype.getQuantityEllementsOfMatrix = function(compare) {
     let counter = 0;
 
     for ( let i = 0; i < this.length; i++ ) {
@@ -310,7 +314,7 @@ Array.prototype.doubleEllemCount = function(compare){
 };
 
 //13) сумма от минимального до максимального значений
-function sumMinToMax(minNumber, maxNumber, compare){
+function getSumEllementsInRange(minNumber, maxNumber, compare) {
     let sum = 0;
 
     if ( minNumber >= maxNumber ) {
@@ -327,7 +331,7 @@ function sumMinToMax(minNumber, maxNumber, compare){
 }
 
 //14) Среднее значение элементов одномерного и двумерного массивов
-Array.prototype.ellemAverageSum = function(compare){
+Array.prototype.getAverageValueEllements = function(compare) {
     let sum = 0;
     let counter = 0;
 
@@ -341,7 +345,7 @@ Array.prototype.ellemAverageSum = function(compare){
     return sum / counter;
 };
 
-Array.prototype.doubleEllemAverageSum = function(compare){
+Array.prototype.getAverageValueEllementsOfMatrix = function(compare) {
     let sum = 0;
     let counter = 0;
 
@@ -359,7 +363,7 @@ Array.prototype.doubleEllemAverageSum = function(compare){
 };
 
 //15) транспортирование матрицы
-function getTransposeMatrix(matrix){
+function transportationMatrix(matrix) {
     let rows = matrix.length;
     let collumns = matrix[0].length;
     let transposeMatrix = [];
@@ -376,7 +380,7 @@ function getTransposeMatrix(matrix){
 }
 
 //16 суммирование матриц
-function getSumMatrix(firstMatrix, secondMatrix){
+function getSumMatrix(firstMatrix, secondMatrix) {
 
     let rows = firstMatrix.length;
     let collumns = firstMatrix[0].length;
@@ -398,7 +402,7 @@ function getSumMatrix(firstMatrix, secondMatrix){
 }
 
 //17) удаление строки если в ней есть нулевой элемент
-function dellMatrixRowWithZero(matrix){
+function deleteRowWithZeroFromMatrix(matrix) {
 
     for ( let i = 0; i < matrix.length; i++ ) {
         for ( let j of matrix[i] ) {
@@ -413,7 +417,7 @@ function dellMatrixRowWithZero(matrix){
 }
 
 //удаление столбца, если есть нулевой элемент
-function dellMatrixCollumnWithZero(matrix) {
+function deleteCollumnWithZeroFromMatrix(matrix) {
     for ( let i = 0; i < matrix.length; i++ ) {
         for ( let j = 0; j < matrix[i].length; j++ ) {
             if ( matrix[i][j] === 0 ) {

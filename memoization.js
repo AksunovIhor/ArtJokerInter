@@ -57,7 +57,7 @@ function creatDigitsArray(number) {
     return numeralsArray;
 }
 
-function getDigitsCounter() {
+function getCountDigits() {
     let cache = {};
 
     return function memorize(number, counter, result, digitsArray) {
@@ -85,7 +85,7 @@ function getDigitsCounter() {
 }
 
 //4) Уникальные слова в предложении
-function uniqWords() {
+function getCountUniqWords() {
     let cache = {};
 
     return function memorize(string, wordsArray, counter, uniqWordsCounter) {
@@ -109,7 +109,7 @@ function uniqWords() {
                     ++uniqWordsCounter;
                 }
         
-                return uniqWords(string, wordsArray, ++counter, ++uniqWordsCounter);
+                return memorize(string, wordsArray, ++counter, ++uniqWordsCounter);
             }
         }
     
@@ -117,29 +117,8 @@ function uniqWords() {
     }
 }
 
-function uniqWords(string, wordsArray, counter, uniqWordsCounter) {
-
-    if ( counter < wordsArray.length ) {
-        for ( let word of wordsArray ) {
-            for ( let word2 of wordsArray ) {
-                if ( word === word2 ) {
-                    ++counter;
-                }
-            }
-    
-            if ( counter === 1 ) {
-                ++uniqWordsCounter;
-            }
-    
-            return uniqWords(string, wordsArray, ++counter, ++uniqWordsCounter);
-        }
-    }
-
-    return uniqWordsCounter;
-}
-
 //5) вхождение каждого слова в строку
-function getWordsQuantity() {
+function getQuantityOfEachWords() {
     let cache = {};
 
     return function memorize(string, uniqWordsObject, counter) {
@@ -171,15 +150,16 @@ function getFibonacciNumbers() {
     let cache = [];
 
     return function memorize(amountNumbers, result, counter) {
+
         if (cache[0] >= amountNumbers) {
             return cache[1][amountNumbers];
         }
 
-        result = result || 0;
+        result = result || [0, 1];
         counter = counter || 0;
 
-        let prevNumber = fibonacciNumbers.length - 1;
-        let nextNumber = fibonacciNumbers.length - 2;
+        let prevNumber = result[result.length - 2];
+        let nextNumber = result[result.length - 1];
         let sum = prevNumber + nextNumber;
 
         if (counter < amountNumbers - 1) {
@@ -193,33 +173,26 @@ function getFibonacciNumbers() {
 }
 
 //8) факториал
-function numbersCount(){
-    let cache = {};
+function getFactorial() {
+    let memo = {};
 
-    return function memorize(number, counter){
-        counter = counter || 0;
-        let numeral = 0;
-        
-        if(number){
-            let result = 0;
+    return function memorize(num){
+         if(num == 1){
+             return 1;
+         }
 
-            cache[number] = cache[number] || {};
+         let result = memo[num];
+         if ( result === undefined ) {
+             result = fact(num - 1);
+             memo[num] = result;
+         }
 
-            if(number in cache && counter in cache[number]){
-                result = cache[number][cache];
-            }
-            else{
-                numeral = number % 10;
-                result = numbersCount((number - numeral) / 10, ++counter);
-                cache[number][counter] = result;
-            }
-        }
-        return counter;
+         return num * result;
     };
 }
 
 //9) сумма элементов массива
-function getArrayEllemSum() {
+function getSumEllementsOfArray() {
     let cache = {};
 
     return function memorize(array, compare, index, sum) {
@@ -243,7 +216,7 @@ function getArrayEllemSum() {
 }
 
 //10)посчет элементов в массиве
-function getArrayEllemCount() {
+function getQuantityEllementsOfArray() {
     let cache = {};
 
     return function memorize(array, compare, index, counter) {
@@ -268,7 +241,7 @@ function getArrayEllemCount() {
 }
 
 //11) десятичное в двоичное
-function decToBin() {
+function convertDecimalToBinnary() {
     let cache = {};
 
     return function memorize(number, strBit) {
@@ -301,7 +274,7 @@ function decToBin() {
 }
 
 //12) 9-10 задания для двумерных массивов
-function getMatrixEllemSum() {
+function getSumEllementsOfMatrix() {
     let cache = {};
 
     return function memorize(matrix, compare, rows, colls, sum) {
@@ -328,7 +301,7 @@ function getMatrixEllemSum() {
     };
 }
 
-function getMatrixEllemCount() {
+function getQuantityEllementsOfMatrix() {
     let cache = {};
 
     return function memorize(matrix, compare, rows, colls, counter) {
@@ -357,7 +330,7 @@ function getMatrixEllemCount() {
 }
 
 //13) сумма от минимального до максимального значений
-function sumMinToMax() {
+function getSumEllementsInRange() {
     let cache = {};
 
     return function memorize(minNumber, maxNumber, compare, sum, index) {
@@ -384,7 +357,7 @@ function sumMinToMax() {
 }
 
 //14) Среднее значение элементов одномерного и двумерного массивов
-function getArrayEllemAverageSum() {
+function getAverageValueEllementsOfArray() {
     let cache = {};
 
     return function memorize(array, compare, sum, counter, index) {
@@ -408,7 +381,7 @@ function getArrayEllemAverageSum() {
     };
 }
 
-function getMatrixEllemAverageSum() {
+function getAverageValueEllementsOfMatrix() {
     let cache = {};
 
     return function memorize(matrix, compare, sum, counter, rows, colls) {
@@ -438,7 +411,7 @@ function getMatrixEllemAverageSum() {
 }
 
 //15) транспортирование матрицы
-function getTransposeMatrix() {
+function transportationMatrix() {
     let cache = {};
 
     return function memorize(matrix, rows, colls, transposeMatrix) {
@@ -497,7 +470,7 @@ function getSumMatrix() {
 }
 
 //17) удаление строки если в ней есть нулевой элемент
-function dellMatrixRowWithZero() {
+function deleteRowWithZeroFromMatrix() {
     let cache = {};
 
     return function memorize(matrix, rows, colls, newMatrix) {
@@ -530,7 +503,7 @@ function dellMatrixRowWithZero() {
 }
 
 //удаление столбца, если есть нулевой элемент
-function dellMatrixCollumnWithZero() {
+function deleteCollumnWithZeroFromMatrix() {
     let cache = {};
 
     return function memorize(matrix, rows, colls, index, newMatrix) {
@@ -553,10 +526,10 @@ function dellMatrixCollumnWithZero() {
                         matrix[i].splice(index, 1);
                     }
                 }
-                return dellMatrixCollumnWithZero(matrix, rows, ++colls, index);
+                return dellMatrixCollumnWithZero(matrix, rows, ++colls, index, newMatrix);
             }
             colls = 0;
-            return dellMatrixCollumnWithZero(matrix, ++rows, colls, index);
+            return dellMatrixCollumnWithZero(matrix, ++rows, colls, index, newMatrix);
         }
         return cache[newMatrix] = matrix;
     };

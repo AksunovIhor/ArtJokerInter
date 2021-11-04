@@ -47,7 +47,7 @@ function creatDigitsArray(number) {
     return numeralsArray;
 }
 
-function getDigitsCounter(number, counter, result, digitsArray) {
+function getCountDigits(number, counter, result, digitsArray) {
     counter = counter || 0;
     digitsArray = digitsArray || creatDigitsArray(number);
     result = result || {};
@@ -60,14 +60,14 @@ function getDigitsCounter(number, counter, result, digitsArray) {
             result[digitsArray[counter]] = 1;
         }
 
-        return getDigitsCounter(number, ++counter, result, digitsArray);
+        return getCountDigits(number, ++counter, result, digitsArray);
     }
 
     return result;
 }
 
 //4) Уникальные слова в предложении
-function uniqWords(string, wordsArray, counter, uniqWordsCounter) {
+function getCountUniqWords(string, wordsArray, counter, uniqWordsCounter) {
     wordsArray = wordsArray || string.split(/[\s.,]+/gi);
     uniqWordsCounter = uniqWordsCounter || 0;
     counter = counter || 0;
@@ -84,7 +84,7 @@ function uniqWords(string, wordsArray, counter, uniqWordsCounter) {
                 ++uniqWordsCounter;
             }
     
-            return uniqWords(string, wordsArray, ++counter, ++uniqWordsCounter);
+            return getCountUniqWords(string, wordsArray, ++counter, ++uniqWordsCounter);
         }
     }
 
@@ -92,14 +92,14 @@ function uniqWords(string, wordsArray, counter, uniqWordsCounter) {
 }
 
 //5) вхождение каждого слова в строку
-function getWordsQuantity(string, uniqWordsObject, counter) {
+function getQuantityOfEachWords(string, uniqWordsObject, counter) {
     let wordsArray = string.split(/[\s.,]+/gi);
     counter = counter || 0;
     uniqWordsObject = uniqWordsObject || {};
 
     if ( counter < wordsArray.length ) {
         uniqWordsObject[wordsArray[counter]] = ++uniqWordsObject[wordsArray[counter]] || 1;
-        getWordsQuantity(string, uniqWordsObject, ++counter);
+        return getQuantityOfEachWords(string, uniqWordsObject, ++counter);
     }
 
     return uniqWordsObject;
@@ -108,7 +108,7 @@ function getWordsQuantity(string, uniqWordsObject, counter) {
 //6) числа фибоначи
 function getFibonacciNumbers(amountNumbers) {
     if ( amountNumbers <= 2 ) {
-        return [0, 1];
+        return [0, 1].splice(0, amountNumbers);
     }
 
     let fibonacciNumbers = getFibonacciNumbers(amountNumbers - 1);
@@ -130,7 +130,7 @@ function getFactorial(number) {
 }
 
 //9) сумма элементов массива
-function getArrayEllemSum(array, compare, index, sum) {
+function getSumEllementsOfArray(array, compare, index, sum) {
     sum = sum || 0;
     index = index || 0;
 
@@ -139,14 +139,14 @@ function getArrayEllemSum(array, compare, index, sum) {
             sum += array[index];
         }
 
-        return getArrayEllemSum(array, compare, ++index, sum);
+        return getSumEllementsOfArray(array, compare, ++index, sum);
     }
 
     return sum;
 }
 
 //10)посчет элементов в массиве
-function getArrayEllemCount(array, compare, index, counter) {
+function getQuantityEllementsOfArray(array, compare, index, counter) {
     counter = counter || 0;
     index = index || 0;
 
@@ -154,14 +154,14 @@ function getArrayEllemCount(array, compare, index, counter) {
         if ( compare(array[index]) ) {
             ++counter;
         }
-        return getArrayEllemCount(array, compare, ++index, counter);
+        return getQuantityEllementsOfArray(array, compare, ++index, counter);
     }
 
     return counter;
 }
 
 //11) десятичное в двоичное
-function decToBin(number, strBit) {
+function convertDecimalToBinnary(number, strBit) {
     strBit = strBit || "";
 
     if(number){
@@ -173,7 +173,7 @@ function decToBin(number, strBit) {
             strBit += number % 2;
         }
 
-        return decToBin(number / 2, strBit);
+        return convertDecimalToBinnary(number / 2, strBit);
     }
 
     let reverseString = "";
@@ -186,7 +186,7 @@ function decToBin(number, strBit) {
 }
 
 //12) 9-10 задания для двумерных массивов
-function getMatrixEllemSum(matrix, compare, rows, colls, sum) {
+function getSumEllementsOfMatrix(matrix, compare, rows, colls, sum) {
     rows = rows || 0;
     colls = colls || 0;
     sum = sum || 0;
@@ -196,16 +196,16 @@ function getMatrixEllemSum(matrix, compare, rows, colls, sum) {
             if ( compare(matrix[rows][colls]) ) {
                 sum += matrix[rows][colls];
             }
-            return getMatrixEllemSum(matrix, compare, rows, ++colls, sum);
+            return getSumEllementsOfMatrix(matrix, compare, rows, ++colls, sum);
         }
         colls = 0;
-        return getMatrixEllemSum(matrix, compare, ++rows, colls, sum);
+        return getSumEllementsOfMatrix(matrix, compare, ++rows, colls, sum);
     }
 
     return sum;
 }
 
-function getMatrixEllemCount(matrix, compare, rows, colls, counter) {
+function getQuantityEllementsOfMatrix(matrix, compare, rows, colls, counter) {
     rows = rows || 0;
     colls = colls || 0;
     counter = counter || 0;
@@ -215,17 +215,17 @@ function getMatrixEllemCount(matrix, compare, rows, colls, counter) {
             if ( compare(matrix[rows][colls]) ) {
                 ++counter;
             }
-            return getMatrixEllemCount(matrix, compare, rows, ++colls, counter);
+            return getQuantityEllementsOfMatrix(matrix, compare, rows, ++colls, counter);
         }
         colls = 0;
-        return getMatrixEllemCount(matrix, compare, ++rows, colls, counter);
+        return getQuantityEllementsOfMatrix(matrix, compare, ++rows, colls, counter);
     }
 
     return counter;
 }
 
 //13) сумма от минимального до максимального значений
-function sumMinToMax(minNumber, maxNumber, compare, sum, index){
+function getSumEllementsInRange(minNumber, maxNumber, compare, sum, index){
     sum = sum || 0;
     index = index || minNumber;
 
@@ -237,14 +237,14 @@ function sumMinToMax(minNumber, maxNumber, compare, sum, index){
         if ( compare(index) ) {
             sum += index;
         }
-        return sumMinToMax(minNumber, maxNumber, compare, sum, ++index);
+        return getSumEllementsInRange(minNumber, maxNumber, compare, sum, ++index);
     }
 
     return sum;
 }
 
 //14) Среднее значение элементов одномерного и двумерного массивов
-function getArrayEllemAverageSum(array, compare, sum, counter, index) {
+function getAverageValueEllementsOfArray(array, compare, sum, counter, index) {
     sum = sum || 0;
     counter = counter || 0;
     index = index || 0;
@@ -254,13 +254,13 @@ function getArrayEllemAverageSum(array, compare, sum, counter, index) {
             sum += array[index];
             ++counter;
         }
-        return getEllemAverageSum(array, compare, sum, counter, ++index)
+        return getAverageValueEllementsOfArray(array, compare, sum, counter, ++index)
     }
 
     return sum / counter;
 }
 
-function getMatrixEllemAverageSum(matrix, compare, sum, counter, rows, colls) {
+function getAverageValueEllementsOfMatrix(matrix, compare, sum, counter, rows, colls) {
     sum = sum || 0;
     counter = counter || 0;
     rows = rows || 0;
@@ -272,17 +272,17 @@ function getMatrixEllemAverageSum(matrix, compare, sum, counter, rows, colls) {
                 sum += matrix[rows][colls];
                 ++counter;
             }
-            return getMatrixEllemAverageSum(matrix, compare, sum, counter, rows, ++colls);
+            return getAverageValueEllementsOfMatrix(matrix, compare, sum, counter, rows, ++colls);
         }
         colls = 0;
-        return getMatrixEllemAverageSum(matrix, compare, sum, counter, ++rows, colls);
+        return getAverageValueEllementsOfMatrix(matrix, compare, sum, counter, ++rows, colls);
     }
     
     return sum / counter;
 }
 
 //15) транспортирование матрицы
-function getTransposeMatrix(matrix, rows, colls, transposeMatrix){
+function transportationMatrix(matrix, rows, colls, transposeMatrix){
     rows = rows || 0;
     colls = colls || 0;
     transposeMatrix = transposeMatrix || [];
@@ -294,15 +294,14 @@ function getTransposeMatrix(matrix, rows, colls, transposeMatrix){
 
         if ( colls < matrix.length ) {
             transposeMatrix[rows][colls] = matrix[colls][rows];
-            return getTransposeMatrix(matrix, rows, ++colls, transposeMatrix);
+            return transportationMatrix(matrix, rows, ++colls, transposeMatrix);
         }
         colls = 0;
-        return getTransposeMatrix(matrix, ++rows, colls, transposeMatrix);
+        return transportationMatrix(matrix, ++rows, colls, transposeMatrix);
     }
 
     return transposeMatrix;
 }
-
 
 //16) суммирование матриц
 function getSumMatrix(firstMatrix, secondMatrix, rows, colls, summuryMatrix){
@@ -327,7 +326,7 @@ function getSumMatrix(firstMatrix, secondMatrix, rows, colls, summuryMatrix){
 }
 
 //17) удаление строки если в ней есть нулевой элемент
-function dellMatrixRowWithZero(matrix, rows, colls){
+function deleteRowWithZeroFromMatrix(matrix, rows, colls){
     rows = rows || 0;
     colls = colls || 0;
 
@@ -338,19 +337,19 @@ function dellMatrixRowWithZero(matrix, rows, colls){
                 if ( rows !== 0 ) {
                     --rows;
                 }
-                return dellMatrixRowWithZero(matrix, rows, colls);
+                return deleteRowWithZeroFromMatrix(matrix, rows, colls);
             }
-            return dellMatrixRowWithZero(matrix, rows, ++colls);
+            return deleteRowWithZeroFromMatrix(matrix, rows, ++colls);
         }
         colls = 0;
-        return dellMatrixRowWithZero(matrix, ++rows, colls);
+        return deleteRowWithZeroFromMatrix(matrix, ++rows, colls);
     }
 
     return matrix;
 }
 
 //удаление столбца, если есть нулевой элемент
-function dellMatrixCollumnWithZero(matrix, rows, colls, index) {
+function deleteCollumnWithZeroFromMatrix(matrix, rows, colls, index) {
     rows = rows || 0;
     colls = colls || 0;
     index = index || 0;
@@ -364,10 +363,10 @@ function dellMatrixCollumnWithZero(matrix, rows, colls, index) {
                     matrix[i].splice(index, 1);
                 }
             }
-            return dellMatrixCollumnWithZero(matrix, rows, ++colls, index);
+            return deleteCollumnWithZeroFromMatrix(matrix, rows, ++colls, index);
         }
         colls = 0;
-        return dellMatrixCollumnWithZero(matrix, ++rows, colls, index);
+        return deleteCollumnWithZeroFromMatrix(matrix, ++rows, colls, index);
     }
 
     return matrix;
