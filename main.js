@@ -69,7 +69,7 @@ function getCountDigits(number) {
 }
 
 //4) уникальные слова в предложении +
-function getCountUniqWords(string){
+function findQuantitytUniqWords(string){
     let counter = 0;
     let uniqWordsCounter = 0;
     let wordsArray = string.split(/[\s.,]+/gi);
@@ -91,7 +91,7 @@ function getCountUniqWords(string){
 }
 
 //5) вхождение каждого слова в строку +
-function getQuantityOfEachWords(string){
+function getQuantityAllWords(string){
     let wordsArray = string.split(/[\s.,]+/gi);
     let counter = 0;
     let uniqWordsObject = {};
@@ -122,6 +122,7 @@ function getFibonacciNumbers(amountNumbers){
 
     return fibonacciNumbers;
 }
+getFibonacciNumbers(7);
 
 //7)площадь и периметр круга, треугольника, квадрата + 
 class Rectangle{

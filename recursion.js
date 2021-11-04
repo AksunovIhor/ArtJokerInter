@@ -67,7 +67,7 @@ function getCountDigits(number, counter, result, digitsArray) {
 }
 
 //4) Уникальные слова в предложении +
-function getCountUniqWords(string, wordsArray, counter, uniqWordsCounter) {
+function findQuantitytUniqWords(string, wordsArray, counter, uniqWordsCounter) {
     wordsArray = wordsArray || string.split(/[\s.,]+/gi);
     uniqWordsCounter = uniqWordsCounter || 0;
     counter = counter || 0;
@@ -84,7 +84,7 @@ function getCountUniqWords(string, wordsArray, counter, uniqWordsCounter) {
                 ++uniqWordsCounter;
             }
     
-            return getCountUniqWords(string, wordsArray, ++counter, ++uniqWordsCounter);
+            return findQuantitytUniqWords(string, wordsArray, ++counter, ++uniqWordsCounter);
         }
     }
 
@@ -92,14 +92,14 @@ function getCountUniqWords(string, wordsArray, counter, uniqWordsCounter) {
 }
 
 //5) вхождение каждого слова в строку +
-function getQuantityOfEachWords(string, uniqWordsObject, counter) {
+function getQuantityAllWords(string, uniqWordsObject, counter) {
     let wordsArray = string.split(/[\s.,]+/gi);
     counter = counter || 0;
     uniqWordsObject = uniqWordsObject || {};
 
     if ( counter < wordsArray.length ) {
         uniqWordsObject[wordsArray[counter]] = ++uniqWordsObject[wordsArray[counter]] || 1;
-        return getQuantityOfEachWords(string, uniqWordsObject, ++counter);
+        return getQuantityAllWords(string, uniqWordsObject, ++counter);
     }
 
     return uniqWordsObject;

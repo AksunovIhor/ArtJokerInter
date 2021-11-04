@@ -77,13 +77,14 @@ function getCountDigits() {
     
             return memorize(number, ++counter, result, digitsArray);
         }
-    
-        return cache[number] = result;
+        cache[number] = result;
+
+        return cache[number];
     };
 }
 
 //4) Уникальные слова в предложении +
-function getCountUniqWords() {
+function findQuantitytUniqWords() {
     let cache = {};
 
     return function memorize(string, wordsArray, counter, uniqWordsCounter) {
@@ -110,13 +111,14 @@ function getCountUniqWords() {
                 return memorize(string, wordsArray, counter, ++uniqWordsCounter);
             }
         }
-    
-        return cache[string] = uniqWordsCounter;
+        cache[string] = uniqWordsCounter;
+
+        return cache[string];
     }
 }
 
 //5) вхождение каждого слова в строку +
-function getQuantityOfEachWords() {
+function getQuantityAllWords() {
     let cache = {};
 
     return function memorize(string, uniqWordsObject, counter) {
@@ -137,23 +139,28 @@ function getQuantityOfEachWords() {
 
             return memorize(string, uniqWordsObject, ++counter);
         }
+        cache[string] = uniqWordsObject;
 
-        return cache[string] = uniqWordsObject;
+        return cache[string];
     };
 }
 
-//6) числа фибоначи +
+//6) числа фибоначи -
 function getFibonacciNumbers() {
     let cache = [];
 
     return function memorize(amountNumbers, result, counter) {
-
-        if (cache[0] >= amountNumbers) {
-            return cache[1][amountNumbers];
-        }
-
         result = result || [0, 1];
         counter = counter || 0;
+        
+        if ( amountNumbers <= 2 ) {
+            cache[amountNumbers] = result.splice(0, amountNumbers);
+            return cache[amountNumbers];
+        }
+
+        if ( cache[amountNumbers] ) {
+            return cache[amountNumbers];
+        }
 
         let prevNumber = result[result.length - 2];
         let nextNumber = result[result.length - 1];
@@ -163,9 +170,9 @@ function getFibonacciNumbers() {
             result.push(sum);
             return memorize(amountNumbers, result, ++counter);
         }
-
-        cache[0] = amountNumbers;
-        return cache[1] = result;
+        cache[amountNumbers] = result;
+        
+        return cache[amountNumbers];
     };
 }
 
@@ -207,8 +214,9 @@ function getSumEllementsOfArray() {
     
             return memorize(array, compare, ++index, sum);
         }
+        cache[array + compare] = sum;
 
-        return cache[array + compare] = sum;
+        return cache[array + compare];
     };
 }
 
@@ -231,9 +239,9 @@ function getQuantityEllementsOfArray() {
     
             return memorize(array, compare, ++index, counter);
         }
+        cache[array + compare] = counter;
 
-        return cache[array + compare] = counter;
-
+        return cache[array + compare];
     }
 }
 
@@ -265,8 +273,9 @@ function convertDecimalToBinnary() {
         for ( let i = strBit.length - 2; i >= 0; i-- ) {
             reverseString += strBit.charAt(i);
         }
-        
-        return cache[number] = reverseString;
+        cache[number] = reverseString;
+
+        return cache[number];
     };
 }
 
@@ -293,8 +302,9 @@ function getSumEllementsOfMatrix() {
             colls = 0;
             return memorize(matrix, compare, ++rows, colls, sum);
         }
-    
-        return cache[matrix + compare] = sum;
+        cache[matrix + compare] = sum;
+
+        return cache[matrix + compare];
     };
 }
 
@@ -320,9 +330,9 @@ function getQuantityEllementsOfMatrix() {
             colls = 0;
             return memorize(matrix, compare, ++rows, colls, counter);
         }
-    
-        return cache[matrix + compare] = counter;
+        cache[matrix + compare] = counter;
 
+        return cache[matrix + compare];
     };
 }
 
@@ -348,8 +358,9 @@ function getSumEllementsInRange() {
             }
             return memorize(minNumber, maxNumber, compare, sum, ++index);
         }
-    
-        return cache[minNumber + maxNumber + compare] = sum;
+        cache[minNumber + maxNumber + compare] = sum;
+
+        return cache[minNumber + maxNumber + compare];
     };
 }
 
@@ -373,8 +384,9 @@ function getAverageValueEllementsOfArray() {
             }
             return memorize(array, compare, sum, counter, ++index)
         }
-    
-        return cache[array + compare] = (sum / counter);
+        cache[array + compare] = sum / counter;
+
+        return cache[array + compare];
     };
 }
 
@@ -402,8 +414,9 @@ function getAverageValueEllementsOfMatrix() {
             colls = 0;
             return memorize(matrix, compare, sum, counter, ++rows, colls);
         }
-        
-        return cache[matrix + compare] = sum / counter;
+        cache[matrix + compare] = sum / counter;
+
+        return cache[matrix + compare];
     };
 }
 
@@ -432,7 +445,9 @@ function transportationMatrix() {
             colls = 0;
             return memorize(matrix, ++rows, colls, transposeMatrix);
         }
-        return cache[matrix] = transposeMatrix;
+        cache[matrix] = transposeMatrix;
+
+        return cache[matrix];
     };
 }
 
@@ -461,8 +476,9 @@ function getSumMatrix() {
             colls = 0;
             return memorize(firstMatrix, secondMatrix, ++rows, colls, summuryMatrix);
         }
-    
-        return cache[firstMatrix + secondMatrix] = summuryMatrix;
+        cache[firstMatrix + secondMatrix] = summuryMatrix;
+
+        return cache[firstMatrix + secondMatrix];
     };
 }
 
@@ -494,8 +510,9 @@ function deleteRowWithZeroFromMatrix() {
             colls = 0;
             return memorize(matrix, ++rows, colls, newMatrix);
         }
-    
-        return cache[newMatrix] = matrix;
+        cache[newMatrix] = matrix;
+
+        return cache[newMatrix];
     };
 }
 
@@ -528,6 +545,8 @@ function deleteCollumnWithZeroFromMatrix() {
             colls = 0;
             return memorize(matrix, ++rows, colls, index, newMatrix);
         }
-        return cache[newMatrix] = matrix;
+        cache[newMatrix] = matrix;
+
+        return cache[newMatrix];
     };
 }
