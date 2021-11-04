@@ -1,6 +1,6 @@
 'use strict';
 
-//1) анаграмма
+//1) анаграмма +
 function isAnagram() {
     let cache = {};
 
@@ -42,7 +42,7 @@ function isAnagram() {
     };
 }
 
-//3) количество каждой цифры в числе
+//3) количество каждой цифры в числе +
 function creatDigitsArray(number) {
     let numeralsArray = [];
 
@@ -82,7 +82,7 @@ function getCountDigits() {
     };
 }
 
-//4) Уникальные слова в предложении
+//4) Уникальные слова в предложении +
 function getCountUniqWords() {
     let cache = {};
 
@@ -107,7 +107,7 @@ function getCountUniqWords() {
                     ++uniqWordsCounter;
                 }
         
-                return memorize(string, wordsArray, ++counter, ++uniqWordsCounter);
+                return memorize(string, wordsArray, counter, ++uniqWordsCounter);
             }
         }
     
@@ -115,7 +115,7 @@ function getCountUniqWords() {
     }
 }
 
-//5) вхождение каждого слова в строку
+//5) вхождение каждого слова в строку +
 function getQuantityOfEachWords() {
     let cache = {};
 
@@ -140,10 +140,9 @@ function getQuantityOfEachWords() {
 
         return cache[string] = uniqWordsObject;
     };
-    
 }
 
-//6) числа фибоначи
+//6) числа фибоначи +
 function getFibonacciNumbers() {
     let cache = [];
 
@@ -160,7 +159,7 @@ function getFibonacciNumbers() {
         let nextNumber = result[result.length - 1];
         let sum = prevNumber + nextNumber;
 
-        if (counter < amountNumbers - 1) {
+        if (counter < amountNumbers - 2) {
             result.push(sum);
             return memorize(amountNumbers, result, ++counter);
         }
@@ -170,7 +169,7 @@ function getFibonacciNumbers() {
     };
 }
 
-//8) факториал
+//8) факториал +
 function getFactorial() {
     let memo = {};
 
@@ -189,7 +188,7 @@ function getFactorial() {
     };
 }
 
-//9) сумма элементов массива
+//9) сумма элементов массива +
 function getSumEllementsOfArray() {
     let cache = {};
 
@@ -213,7 +212,7 @@ function getSumEllementsOfArray() {
     };
 }
 
-//10)посчет элементов в массиве
+//10)посчет элементов в массиве +
 function getQuantityEllementsOfArray() {
     let cache = {};
 
@@ -238,7 +237,7 @@ function getQuantityEllementsOfArray() {
     }
 }
 
-//11) десятичное в двоичное
+//11) десятичное в двоичное +
 function convertDecimalToBinnary() {
     let cache = {};
 
@@ -254,7 +253,7 @@ function convertDecimalToBinnary() {
                 strBit += number % 2;
             }
             else{
-                number = number - (number % 1);
+                number -= number % 1;
                 strBit += number % 2;
             }
     
@@ -266,12 +265,12 @@ function convertDecimalToBinnary() {
         for ( let i = strBit.length - 2; i >= 0; i-- ) {
             reverseString += strBit.charAt(i);
         }
-    
+        
         return cache[number] = reverseString;
     };
 }
 
-//12) 9-10 задания для двумерных массивов
+//12) 9-10 задания для двумерных массивов +
 function getSumEllementsOfMatrix() {
     let cache = {};
 
@@ -305,7 +304,7 @@ function getQuantityEllementsOfMatrix() {
     return function memorize(matrix, compare, rows, colls, counter) {
         rows = rows || 0;
         colls = colls || 0;
-        sum = sum || 0;
+        counter = counter || 0;
 
         if ( cache[matrix + compare] ) {
             return cache[matrix + compare];
@@ -327,7 +326,7 @@ function getQuantityEllementsOfMatrix() {
     };
 }
 
-//13) сумма от минимального до максимального значений
+//13) сумма от минимального до максимального значений +
 function getSumEllementsInRange() {
     let cache = {};
 
@@ -354,7 +353,7 @@ function getSumEllementsInRange() {
     };
 }
 
-//14) Среднее значение элементов одномерного и двумерного массивов
+//14) Среднее значение элементов одномерного и двумерного массивов +
 function getAverageValueEllementsOfArray() {
     let cache = {};
 
@@ -408,7 +407,7 @@ function getAverageValueEllementsOfMatrix() {
     };
 }
 
-//15) транспортирование матрицы
+//15) транспортирование матрицы +
 function transportationMatrix() {
     let cache = {};
 
@@ -437,7 +436,7 @@ function transportationMatrix() {
     };
 }
 
-//16) суммирование матриц
+//16) суммирование матриц +
 function getSumMatrix() {
     let cache = {};
 
@@ -464,10 +463,10 @@ function getSumMatrix() {
         }
     
         return cache[firstMatrix + secondMatrix] = summuryMatrix;
-    }
+    };
 }
 
-//17) удаление строки если в ней есть нулевой элемент
+//17) удаление строки если в ней есть нулевой элемент +
 function deleteRowWithZeroFromMatrix() {
     let cache = {};
 
@@ -490,17 +489,17 @@ function deleteRowWithZeroFromMatrix() {
                     }
                     return memorize(matrix, rows, colls, newMatrix);
                 }
-                return memorize(matrix, rows, colls, newMatrix);
+                return memorize(matrix, rows, ++colls, newMatrix);
             }
             colls = 0;
-            return memorize(matrix, rows, colls, newMatrix);
+            return memorize(matrix, ++rows, colls, newMatrix);
         }
     
         return cache[newMatrix] = matrix;
     };
 }
 
-//удаление столбца, если есть нулевой элемент
+//удаление столбца, если есть нулевой элемент +
 function deleteCollumnWithZeroFromMatrix() {
     let cache = {};
 
@@ -524,10 +523,10 @@ function deleteCollumnWithZeroFromMatrix() {
                         matrix[i].splice(index, 1);
                     }
                 }
-                return dellMatrixCollumnWithZero(matrix, rows, ++colls, index, newMatrix);
+                return memorize(matrix, rows, ++colls, index, newMatrix);
             }
             colls = 0;
-            return dellMatrixCollumnWithZero(matrix, ++rows, colls, index, newMatrix);
+            return memorize(matrix, ++rows, colls, index, newMatrix);
         }
         return cache[newMatrix] = matrix;
     };

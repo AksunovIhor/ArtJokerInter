@@ -1,6 +1,6 @@
 'use strict';
 
-//1) анаграмма
+//1) анаграмма +
 function isAnagram(firstWord, secondWord, counter1, counter2, firsWordArray, secondWordArray) {
     counter1 = counter1 || 0;
     counter2 = counter2 || 0;
@@ -34,7 +34,7 @@ function isAnagram(firstWord, secondWord, counter1, counter2, firsWordArray, sec
     }
 }
 
-//3) количество каждой цифры в числе
+//3) количество каждой цифры в числе +
 function creatDigitsArray(number) {
     let numeralsArray = [];
 
@@ -66,7 +66,7 @@ function getCountDigits(number, counter, result, digitsArray) {
     return result;
 }
 
-//4) Уникальные слова в предложении
+//4) Уникальные слова в предложении +
 function getCountUniqWords(string, wordsArray, counter, uniqWordsCounter) {
     wordsArray = wordsArray || string.split(/[\s.,]+/gi);
     uniqWordsCounter = uniqWordsCounter || 0;
@@ -91,7 +91,7 @@ function getCountUniqWords(string, wordsArray, counter, uniqWordsCounter) {
     return uniqWordsCounter;
 }
 
-//5) вхождение каждого слова в строку
+//5) вхождение каждого слова в строку +
 function getQuantityOfEachWords(string, uniqWordsObject, counter) {
     let wordsArray = string.split(/[\s.,]+/gi);
     counter = counter || 0;
@@ -105,7 +105,7 @@ function getQuantityOfEachWords(string, uniqWordsObject, counter) {
     return uniqWordsObject;
 }
 
-//6) числа фибоначи
+//6) числа фибоначи +
 function getFibonacciNumbers(amountNumbers) {
     if ( amountNumbers <= 2 ) {
         return [0, 1].splice(0, amountNumbers);
@@ -120,7 +120,7 @@ function getFibonacciNumbers(amountNumbers) {
     return fibonacciNumbers;
 }
 
-//8) факториал
+//8) факториал +
 function getFactorial(number) {
     if(number === 0 || number === 1) {
         return number;
@@ -129,7 +129,7 @@ function getFactorial(number) {
     return number * getFactorial(number - 1); 
 }
 
-//9) сумма элементов массива
+//9) сумма элементов массива +
 function getSumEllementsOfArray(array, compare, index, sum) {
     sum = sum || 0;
     index = index || 0;
@@ -145,7 +145,7 @@ function getSumEllementsOfArray(array, compare, index, sum) {
     return sum;
 }
 
-//10)посчет элементов в массиве
+//10)посчет элементов в массиве +
 function getQuantityEllementsOfArray(array, compare, index, counter) {
     counter = counter || 0;
     index = index || 0;
@@ -160,7 +160,7 @@ function getQuantityEllementsOfArray(array, compare, index, counter) {
     return counter;
 }
 
-//11) десятичное в двоичное
+//11) десятичное в двоичное +
 function convertDecimalToBinnary(number, strBit) {
     strBit = strBit || "";
 
@@ -169,7 +169,7 @@ function convertDecimalToBinnary(number, strBit) {
             strBit += number % 2;
         }
         else{
-            number = number - (number % 1);
+            number -= number % 1;
             strBit += number % 2;
         }
 
@@ -185,7 +185,7 @@ function convertDecimalToBinnary(number, strBit) {
     return reverseString;
 }
 
-//12) 9-10 задания для двумерных массивов
+//12) 9-10 задания для двумерных массивов +
 function getSumEllementsOfMatrix(matrix, compare, rows, colls, sum) {
     rows = rows || 0;
     colls = colls || 0;
@@ -224,7 +224,7 @@ function getQuantityEllementsOfMatrix(matrix, compare, rows, colls, counter) {
     return counter;
 }
 
-//13) сумма от минимального до максимального значений
+//13) сумма от минимального до максимального значений +
 function getSumEllementsInRange(minNumber, maxNumber, compare, sum, index){
     sum = sum || 0;
     index = index || minNumber;
@@ -243,7 +243,7 @@ function getSumEllementsInRange(minNumber, maxNumber, compare, sum, index){
     return sum;
 }
 
-//14) Среднее значение элементов одномерного и двумерного массивов
+//14) Среднее значение элементов одномерного и двумерного массивов + 
 function getAverageValueEllementsOfArray(array, compare, sum, counter, index) {
     sum = sum || 0;
     counter = counter || 0;
@@ -281,7 +281,7 @@ function getAverageValueEllementsOfMatrix(matrix, compare, sum, counter, rows, c
     return sum / counter;
 }
 
-//15) транспортирование матрицы
+//15) транспортирование матрицы + 
 function transportationMatrix(matrix, rows, colls, transposeMatrix){
     rows = rows || 0;
     colls = colls || 0;
@@ -325,7 +325,7 @@ function getSumMatrix(firstMatrix, secondMatrix, rows, colls, summuryMatrix){
     return summuryMatrix;
 }
 
-//17) удаление строки если в ней есть нулевой элемент
+//17) удаление строки если в ней есть нулевой элемент +
 function deleteRowWithZeroFromMatrix(matrix, rows, colls){
     rows = rows || 0;
     colls = colls || 0;
@@ -348,7 +348,7 @@ function deleteRowWithZeroFromMatrix(matrix, rows, colls){
     return matrix;
 }
 
-//удаление столбца, если есть нулевой элемент
+//удаление столбца, если есть нулевой элемент +
 function deleteCollumnWithZeroFromMatrix(matrix, rows, colls, index) {
     rows = rows || 0;
     colls = colls || 0;
