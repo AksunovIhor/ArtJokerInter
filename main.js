@@ -50,7 +50,7 @@ function creatDigitsArray(number) {
 }
 
 function getCountDigits(number) {
-    let digitsArray = creatArrayDigits(number);
+    let digitsArray = creatDigitsArray(number);
     let result = {};
 
     for ( let i = 0; i < digitsArray.length; i++ ) {
@@ -262,28 +262,22 @@ Array.prototype.getQuantityEllements = function(compare) {
 //11) десятичное в двоичное
 function convertDecimalToBinnary(number) {
     let strBit = "";
-    let nextNumber = number;
 
-    while ( nextNumber > 0 ) {
-        
-        if ( Number.isInteger(nextNumber) ) {
-            strBit += nextNumber % 2;
-        }
-        else{
-            nextNumber -= nextNumber % 1;
-            strBit += nextNumber % 2;
-        }
-        nextNumber /= 2;
+    while ( number ) {
+        number = parseInt(number);
+        strBit += number % 2;
+        number /= 2;
     }
     
     let reverseString = "";
+    
     for ( let i = strBit.length - 2; i >= 0; i-- ) {
         reverseString += strBit.charAt(i);
     }
 
     return reverseString;
 }
-
+convertDecimalToBinnary(4);
 //12) 9-10 задания для двумерных массивов
 Array.prototype.getSumEllementsOfMatrix = function(compare) {
     let sum = 0;
@@ -364,22 +358,19 @@ Array.prototype.getAverageValueEllementsOfMatrix = function(compare) {
 };
 
 //15) транспортирование матрицы
-function transportationMatrix(matrix) {
-    let rows = matrix.length;
-    let collumns = matrix[0].length;
-    let transposeMatrix = [];
+    function transportationMatrix(matrix) {
+        let transposeMatrix = [];
 
-    for ( let i = 0; i < collumns; i++ ) {
-        transposeMatrix[i] = [];
+        for ( let i = 0; i < matrix.length; i++ ) {
+            transposeMatrix[i] = [];
 
-        for ( let j = 0; j < rows; j++ ) {
-            transposeMatrix[i][j] = matrix[j][i];
+            for ( let j = 0; j < matrix.length; j++ ) {
+                transposeMatrix[i][j] = matrix[j][i];
+            }
         }
+
+        return transposeMatrix;
     }
-
-    return transposeMatrix;
-}
-
 //16 суммирование матриц
 function getSumMatrix(firstMatrix, secondMatrix) {
 

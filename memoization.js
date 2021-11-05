@@ -249,32 +249,26 @@ function getQuantityEllementsOfArray() {
 function convertDecimalToBinnary() {
     let cache = {};
 
-    return function memorize(number, strBit) {
-        strBit = strBit || "";
+    return function memorize(number, strBit, numberCopy) {
+        numberCopy = numberCopy || number;
+        strBit = strBit || '';
+        let temp = 0;
 
-        if ( cache[number] ) {
+        if (cache[number]) {
             return cache[number];
         }
-
-        if(number){
-            if(Number.isInteger(number)){
-                strBit += number % 2;
+    
+        if ((temp = numberCopy / 2) >= 1) {
+            if (temp % 2 == parseInt(temp % 2)) {
+                strBit += '0';
+                return memorize(number, strBit, parseInt(temp));
+            } else {
+                strBit += '1';
+                return memorize(number, strBit, parseInt(temp));
             }
-            else{
-                number -= number % 1;
-                strBit += number % 2;
-            }
-    
-            return memorize(number / 2, strBit);
         }
-    
-        let reverseString = "";
-    
-        for ( let i = strBit.length - 2; i >= 0; i-- ) {
-            reverseString += strBit.charAt(i);
-        }
-        cache[number] = reverseString;
-
+        strBit += '1';
+        cache[number] = strBit.split('').reverse().join('');
         return cache[number];
     };
 }
@@ -433,7 +427,7 @@ function transportationMatrix() {
             return cache[matrix];
         }
 
-        if ( rows < matrix[0].length ) {       
+        if ( rows < matrix.length ) {       
             if ( typeof transposeMatrix[rows] === "undefined" ) {
                 transposeMatrix[rows] = [];
             }
@@ -460,6 +454,10 @@ function getSumMatrix() {
         colls = colls || 0;
         summuryMatrix = summuryMatrix || [];
 
+        if ( firstMatrix.length > secondMatrix.length || secondMatrix.length > firstMatrix.length ) {
+            return false;
+        }
+
         if ( cache[firstMatrix + secondMatrix] ) {
             return cache[firstMatrix + secondMatrix];
         }
@@ -477,7 +475,7 @@ function getSumMatrix() {
             return memorize(firstMatrix, secondMatrix, ++rows, colls, summuryMatrix);
         }
         cache[firstMatrix + secondMatrix] = summuryMatrix;
-
+        console.log(cache);
         return cache[firstMatrix + secondMatrix];
     };
 }

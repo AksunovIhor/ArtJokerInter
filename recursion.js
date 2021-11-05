@@ -165,14 +165,8 @@ function convertDecimalToBinnary(number, strBit) {
     strBit = strBit || "";
 
     if(number){
-        if(Number.isInteger(number)){
-            strBit += number % 2;
-        }
-        else{
-            number -= number % 1;
-            strBit += number % 2;
-        }
-
+        number = parseInt(number);
+        strBit += number % 2;
         return convertDecimalToBinnary(number / 2, strBit);
     }
 
@@ -287,7 +281,7 @@ function transportationMatrix(matrix, rows, colls, transposeMatrix){
     colls = colls || 0;
     transposeMatrix = transposeMatrix || [];
 
-    if ( rows < matrix[0].length ) {       
+    if ( rows < matrix.length ) {       
         if ( typeof transposeMatrix[rows] === "undefined" ) {
             transposeMatrix[rows] = [];
         }
@@ -308,6 +302,10 @@ function getSumMatrix(firstMatrix, secondMatrix, rows, colls, summuryMatrix){
     rows = rows || 0;
     colls = colls || 0;
     summuryMatrix = summuryMatrix || [];
+
+    if ( firstMatrix.length > secondMatrix.length || secondMatrix.length > firstMatrix.length ) {
+        return false;
+    }
 
     if ( rows < firstMatrix.length ) {       
         if ( typeof summuryMatrix[rows] === "undefined" ) {
@@ -371,4 +369,3 @@ function deleteCollumnWithZeroFromMatrix(matrix, rows, colls, index) {
 
     return matrix;
 }
-
