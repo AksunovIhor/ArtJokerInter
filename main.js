@@ -2,30 +2,30 @@
 
 //1) Анаграмма + 
 function isAnagram(firstWord, secondWord) {
-    if ( firstWord.length !== secondWord.length ) {
+    if (firstWord.length !== secondWord.length) {
         return false;
     }
     
-    for ( let i = 0; i < firstWord.length; i++ ) {
+    for (let i = 0; i < firstWord.length; i++) {
         let char1 = firstWord[i];
         let counter1 = 0;
         let counter2 = 0;
         
-        for ( let j = 0; j < secondWord.length; j++ ) {
+        for (let j = 0; j < secondWord.length; j++) {
             let char2 = firstWord[j];
             
-            if ( char1 === char2 ) {
+            if (char1 === char2) {
                 counter1++;
             }
 
             char2 = secondWord[j];
 
-            if ( char1 === char2 ) {
+            if (char1 === char2) {
                 counter2++;
             }
         }
 
-        if ( counter1 !== counter2 ) {
+        if (counter1 !== counter2) {
             return false;
         }
     }
@@ -40,7 +40,7 @@ const isAnagramES6Standart = (firstWord, secondWord) => [...firstWord.toLowerCas
 function creatDigitsArray(number) {
     let digitsArray = [];
 
-    while ( number ) {
+    while (number) {
         let digit = number % 10;
         number = (number - digit) / 10;
         digitsArray.unshift(digit);
@@ -53,12 +53,12 @@ function getCountDigits(number) {
     let digitsArray = creatDigitsArray(number);
     let result = {};
 
-    for ( let i = 0; i < digitsArray.length; i++ ) {
+    for (let i = 0; i < digitsArray.length; i++) {
         let digit = digitsArray[i];
         let counter = 0;
 
-        for ( let j = 0; j < digitsArray.length; j++ ) {
-            if ( digit === digitsArray[j] ) {
+        for (let j = 0; j < digitsArray.length; j++) {
+            if (digit === digitsArray[j]) {
                 counter++;
             }
             result[digit] = counter;
@@ -74,14 +74,14 @@ function findQuantitytUniqWords(string){
     let uniqWordsCounter = 0;
     let wordsArray = string.split(/[\s.,]+/gi);
     
-    for ( let word1 of wordsArray ) {
-        for ( let word2 of wordsArray ) {
+    for (let word1 of wordsArray) {
+        for (let word2 of wordsArray) {
             if ( word1 === word2 ) {
                 counter++;
             }
         }
 
-        if (counter === 1 ) {
+        if (counter === 1) {
             uniqWordsCounter++;
         }
         counter = 0;
@@ -96,11 +96,11 @@ function getQuantityAllWords(string){
     let counter = 0;
     let uniqWordsObject = {};
 
-    for ( let i = 0; i < wordsArray.length; i++ ) {
+    for (let i = 0; i < wordsArray.length; i++) {
         let word = wordsArray[i];
 
-        for ( let j = 0; j < wordsArray.length; j++ ) {
-            if ( word === wordsArray[j] ) {
+        for (let j = 0; j < wordsArray.length; j++) {
+            if (word === wordsArray[j]) {
                 counter++;
             }
         }
@@ -116,13 +116,12 @@ function getQuantityAllWords(string){
 function getFibonacciNumbers(amountNumbers){
     let fibonacciNumbers = [0, 1].splice(0, amountNumbers);
 
-    for ( let i = 2; i < amountNumbers; i++ ) {
+    for (let i = 2; i < amountNumbers; i++) {
         fibonacciNumbers.push(fibonacciNumbers[i - 1] + fibonacciNumbers[i - 2]);
     }
 
     return fibonacciNumbers;
 }
-getFibonacciNumbers(7);
 
 //7)площадь и периметр круга, треугольника, квадрата + 
 class Rectangle{
@@ -226,7 +225,7 @@ class Circle{
 function getFactorial(number){
     let result = 1;
 
-    for ( let i = number; i > 1; i-- ) {
+    for (let i = number; i > 1; i--) {
         result *= i;
     }
 
@@ -237,7 +236,7 @@ function getFactorial(number){
 Array.prototype.getSumEllements = function(compare) {
     let sum = 0;
 
-    for ( let i  = 0; i < this.length; i++ ) {
+    for (let i  = 0; i < this.length; i++) {
         if ( compare(this[i]) ) {
             sum += this[i];
         }
@@ -250,8 +249,8 @@ Array.prototype.getSumEllements = function(compare) {
 Array.prototype.getQuantityEllements = function(compare) {
     let counter = 0;
 
-    for ( let i = 0; i < this.length; i++ ) {
-        if ( compare(this[i]) ) {
+    for (let i = 0; i < this.length; i++) {
+        if (compare(this[i])) {
             counter++;
         }
     }
@@ -263,7 +262,7 @@ Array.prototype.getQuantityEllements = function(compare) {
 function convertDecimalToBinnary(number) {
     let strBit = "";
 
-    while ( number ) {
+    while (number) {
         number = parseInt(number);
         strBit += number % 2;
         number /= 2;
@@ -271,7 +270,7 @@ function convertDecimalToBinnary(number) {
     
     let reverseString = "";
     
-    for ( let i = strBit.length - 2; i >= 0; i-- ) {
+    for (let i = strBit.length - 2; i >= 0; i--) {
         reverseString += strBit.charAt(i);
     }
 
@@ -282,9 +281,9 @@ convertDecimalToBinnary(4);
 Array.prototype.getSumEllementsOfMatrix = function(compare) {
     let sum = 0;
 
-    for ( let i = 0; i < this.length; i++ ) {
-        for ( let j = 0; j < this.length; j++ ) {
-            if ( compare(this[i][j]) ){
+    for (let i = 0; i < this.length; i++) {
+        for (let j = 0; j < this[i].length; j++) {
+            if (compare(this[i][j])) {
                 sum += this[i][j];
             }
         }
@@ -292,16 +291,21 @@ Array.prototype.getSumEllementsOfMatrix = function(compare) {
 
     return sum;
 };
+let ff = [
+    [1,2,3,4,5],
+    [1,2,3,4,5],
+    [1,2,3,4,5]
+];
+ff.getSumEllementsOfMatrix(() => ({}));
 
 Array.prototype.getQuantityEllementsOfMatrix = function(compare) {
     let counter = 0;
 
-    for ( let i = 0; i < this.length; i++ ) {
-        for ( let j = 0; j < this.length; j++ ) {
-            if ( compare(this[i][j]) ) {
+    for (let i = 0; i < this.length; i++) {
+        for (let j = 0; j < this[i].length; j++) {
+            if (compare(this[i][j])) {
                 counter++;
             }
-            
         }
     }
 
@@ -312,12 +316,12 @@ Array.prototype.getQuantityEllementsOfMatrix = function(compare) {
 function getSumEllementsInRange(minNumber, maxNumber, compare) {
     let sum = 0;
 
-    if ( minNumber >= maxNumber ) {
+    if (minNumber >= maxNumber) {
         return false;
     }
     
-    for ( let i = minNumber; i <= maxNumber; i++ ) {
-        if ( compare([i]) ) {
+    for (let i = minNumber; i <= maxNumber; i++) {
+        if (compare([i])) {
             sum += i;
         }
     }
@@ -330,8 +334,8 @@ Array.prototype.getAverageValueEllements = function(compare) {
     let sum = 0;
     let counter = 0;
 
-    for ( let i = 0; i < this.length; i++ ) {
-        if ( compare(this[i]) ) {
+    for (let i = 0; i < this.length; i++) {
+        if (compare(this[i])) {
             sum += this[i];
             counter++;
         }
@@ -344,33 +348,41 @@ Array.prototype.getAverageValueEllementsOfMatrix = function(compare) {
     let sum = 0;
     let counter = 0;
 
-    for ( let i = 0; i < this.length; i++ ) {
-        for ( let j = 0; j < this.length; j++ ) {
-            if ( compare(this[i][j]) ) {
+    for (let i = 0; i < this.length; i++) {
+        for (let j = 0; j < this[i].length; j++) {
+            if (compare(this[i][j])) {
                 sum += this[i][j];
                 counter++;
             }
             
         }
     }
+    console.log(counter, sum);
 
     return sum / counter;
 };
+let x = [[1,2,3,4,5,6,7], [1,2,3,4,5,6,7]];
+x.getAverageValueEllementsOfMatrix(() => ({}));
+let ff = [[1,2,3,4,5][1,2,3,4,5][1,2,3,4,5]];
+ff.getAverageValueEllementsOfMatrix(() => ({}));
 
 //15) транспортирование матрицы
-    function transportationMatrix(matrix) {
-        let transposeMatrix = [];
+function transportationMatrix(matrix) {
+    let transposeMatrix = [];
 
-        for ( let i = 0; i < matrix.length; i++ ) {
-            transposeMatrix[i] = [];
-
-            for ( let j = 0; j < matrix.length; j++ ) {
-                transposeMatrix[i][j] = matrix[j][i];
-            }
+    for (let i = 0; i < matrix.length; i++) {
+        transposeMatrix[i] = [];
+        
+        for (let j = 0; j < matrix.length; j++) {
+            transposeMatrix[i][j] = matrix[j][i];
         }
-
-        return transposeMatrix;
     }
+
+    return transposeMatrix;
+}
+
+transportationMatrix(x);
+
 //16 суммирование матриц
 function getSumMatrix(firstMatrix, secondMatrix) {
 

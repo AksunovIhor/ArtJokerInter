@@ -383,6 +383,13 @@ function getAverageValueEllementsOfArray() {
         return cache[array + compare];
     };
 }
+let ff = [
+    [1,2,3,4,5]
+    [1,2,3,4,5]
+    [1,2,3,4,5]
+];
+let g = getAverageValueEllementsOfArray();
+g(ff);
 
 function getAverageValueEllementsOfMatrix() {
     let cache = {};
