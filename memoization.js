@@ -14,15 +14,15 @@ function isAnagram() {
             return cache[firstWord + secondWord];
         }
 
-        if ( firsWordArray.length !== secondWordArray.length ) {
+        if (firsWordArray.length !== secondWordArray.length) {
             return cache[firstWord + secondWord] = false;
         }
 
-        if ( firsWordArray.toString() === secondWordArray.toString() ) {
+        if (firsWordArray.toString() === secondWordArray.toString()) {
             return cache[firstWord + secondWord] = true;
         } else {
-            if ( firsWordArray[counter1] === secondWordArray[counter2] || counter2 > secondWordArray.length ) {
-                if ( counter1 > firsWordArray.length ) {
+            if (firsWordArray[counter1] === secondWordArray[counter2] || counter2 > secondWordArray.length) {
+                if (counter1 > firsWordArray.length) {
                     return false;
                 }
     
@@ -32,7 +32,7 @@ function isAnagram() {
     
                 return memorize(firstWord, secondWord, ++counter1, counter2, firsWordArray, secondWordArray);
             } else {
-                if ( counter1 > firsWordArray.length || counter2 > firsWordArray.length ) {
+                if (counter1 > firsWordArray.length || counter2 > firsWordArray.length) {
                     return false;
                 }
     
@@ -46,7 +46,7 @@ function isAnagram() {
 function creatDigitsArray(number) {
     let numeralsArray = [];
 
-    while ( number ) {
+    while (number) {
         let numeral = number % 10;
         number = (number - numeral) / 10;
         numeralsArray.unshift(numeral);
@@ -63,12 +63,12 @@ function getCountDigits() {
         digitsArray = digitsArray || creatDigitsArray(number);
         result = result || {};
 
-        if ( cache[number] ) {
+        if (cache[number]) {
             return cache[number];
         }
 
-        if ( counter < digitsArray.length ) {
-            if ( result[digitsArray[counter]] ) {
+        if (counter < digitsArray.length) {
+            if (result[digitsArray[counter]]) {
                 result[digitsArray[counter]]++;
             }
             else{
@@ -92,19 +92,19 @@ function findQuantitytUniqWords() {
         uniqWordsCounter = uniqWordsCounter || 0;
         counter = counter || 0;
 
-        if ( cache[string] ) {
+        if (cache[string]) {
             return cache[string];
         }
 
-        if ( counter < wordsArray.length ) {
-            for ( let word of wordsArray ) {
-                for ( let word2 of wordsArray ) {
-                    if ( word === word2 ) {
+        if (counter < wordsArray.length) {
+            for (let word of wordsArray) {
+                for (let word2 of wordsArray) {
+                    if (word === word2) {
                         ++counter;
                     }
                 }
         
-                if ( counter === 1 ) {
+                if (counter === 1) {
                     ++uniqWordsCounter;
                 }
         
@@ -126,12 +126,12 @@ function getQuantityAllWords() {
         counter = counter || 0;
         uniqWordsObject = uniqWordsObject || {};
 
-        if ( cache[string] ) {
+        if (cache[string]) {
             return cache[string];
         }
 
-        if ( counter < wordsArray.length ) {
-            if ( uniqWordsObject[wordsArray[counter]] ) {
+        if (counter < wordsArray.length) {
+            if (uniqWordsObject[wordsArray[counter]]) {
                 uniqWordsObject[wordsArray[counter]]++;
             } else {
                 uniqWordsObject[wordsArray[counter]] = 1;
@@ -153,12 +153,12 @@ function getFibonacciNumbers() {
         result = result || [0, 1];
         counter = counter || 0;
         
-        if ( amountNumbers <= 2 ) {
+        if (amountNumbers <= 2) {
             cache[amountNumbers] = result.splice(0, amountNumbers);
             return cache[amountNumbers];
         }
 
-        if ( cache[amountNumbers] ) {
+        if (cache[amountNumbers]) {
             return cache[amountNumbers];
         }
 
@@ -181,12 +181,12 @@ function getFactorial() {
     let memo = {};
 
     return function memorize(num){
-         if(num == 1){
+         if (num == 1) {
              return 1;
          }
 
          let result = memo[num];
-         if ( result === undefined ) {
+         if (result === undefined) {
              result = fact(num - 1);
              memo[num] = result;
          }
@@ -203,12 +203,12 @@ function getSumEllementsOfArray() {
         sum = sum || 0;
         index = index || 0;
 
-        if ( cache[array + compare] ) {
+        if (cache[array + compare]) {
             return cache[array + compare];
         }
 
-        if ( index < array.length ) {
-            if( compare(array[index]) ){
+        if (index < array.length) {
+            if(compare(array[index])){
                 sum += array[index];
             }
     
@@ -228,12 +228,12 @@ function getQuantityEllementsOfArray() {
         counter = counter || 0;
         index = index || 0;
 
-        if ( cache[array + compare] ) {
+        if (cache[array + compare]) {
             return cache[array + compare];
         }
 
-        if ( index < array.length ) {
-            if( compare(array[index]) ){
+        if (index < array.length) {
+            if(compare(array[index])){
                 ++counter;
             }
     
@@ -282,13 +282,13 @@ function getSumEllementsOfMatrix() {
         colls = colls || 0;
         sum = sum || 0;
 
-        if ( cache[matrix + compare] ) {
+        if (cache[matrix + compare]) {
             return cache[matrix + compare];
         }
 
         if (rows < matrix.length ) {
-            if (colls < matrix[rows].length ) {
-                if ( compare(matrix[rows][colls]) ) {
+            if (colls < matrix[rows].length) {
+                if (compare(matrix[rows][colls])) {
                     sum += matrix[rows][colls];
                 }
                 return memorize(matrix, compare, rows, ++colls, sum);
@@ -310,13 +310,13 @@ function getQuantityEllementsOfMatrix() {
         colls = colls || 0;
         counter = counter || 0;
 
-        if ( cache[matrix + compare] ) {
+        if (cache[matrix + compare]) {
             return cache[matrix + compare];
         }
 
         if (rows < matrix.length ) {
-            if (colls < matrix[rows].length ) {
-                if ( compare(matrix[rows][colls]) ) {
+            if (colls < matrix[rows].length) {
+                if (compare(matrix[rows][colls])) {
                     ++counter;
                 }
                 return memorize(matrix, compare, rows, ++colls, counter);
@@ -342,12 +342,12 @@ function getSumEllementsInRange() {
             return cache[minNumber + maxNumber + compare];
         }
 
-        if ( minNumber >= maxNumber ) {
+        if (minNumber >= maxNumber) {
             return false;
         }
 
-        if ( index <= maxNumber ) {
-            if ( compare(index) ) {
+        if (index <= maxNumber) {
+            if (compare(index)) {
                 sum += index;
             }
             return memorize(minNumber, maxNumber, compare, sum, ++index);
@@ -367,12 +367,12 @@ function getAverageValueEllementsOfArray() {
         counter = counter || 0;
         index = index || 0;
 
-        if ( cache[array + compare] ) {
+        if (cache[array + compare]) {
             return cache[array + compare];
         }
 
-        if ( index < array.length ) {
-            if ( compare(array[index]) ) {
+        if (index < array.length) {
+            if (compare(array[index])) {
                 sum += array[index];
                 ++counter;
             }
@@ -400,13 +400,13 @@ function getAverageValueEllementsOfMatrix() {
         rows = rows || 0;
         colls = colls || 0;
 
-        if ( cache[matrix + compare] ) {
+        if (cache[matrix + compare]) {
             return cache[matrix + compare];
         }
 
-        if ( rows < matrix.length ) {
-            if ( colls < matrix[rows].length ) {
-                if ( compare(matrix[rows][colls]) ) {
+        if (rows < matrix.length) {
+            if (colls < matrix[rows].length) {
+                if (compare(matrix[rows][colls])) {
                     sum += matrix[rows][colls];
                     ++counter;
                 }
@@ -430,16 +430,16 @@ function transportationMatrix() {
         colls = colls || 0;
         transposeMatrix = transposeMatrix || [];
 
-        if ( cache[matrix] ) {
+        if (cache[matrix]) {
             return cache[matrix];
         }
 
-        if ( rows < matrix.length ) {       
-            if ( typeof transposeMatrix[rows] === "undefined" ) {
+        if (rows < matrix.length) {       
+            if (typeof transposeMatrix[rows] === "undefined") {
                 transposeMatrix[rows] = [];
             }
     
-            if ( colls < matrix.length ) {
+            if (colls < matrix.length) {
                 transposeMatrix[rows][colls] = matrix[colls][rows];
                 return memorize(matrix, rows, ++colls, transposeMatrix);
             }
@@ -461,20 +461,20 @@ function getSumMatrix() {
         colls = colls || 0;
         summuryMatrix = summuryMatrix || [];
 
-        if ( firstMatrix.length > secondMatrix.length || secondMatrix.length > firstMatrix.length ) {
+        if (firstMatrix.length > secondMatrix.length || secondMatrix.length > firstMatrix.length) {
             return false;
         }
 
-        if ( cache[firstMatrix + secondMatrix] ) {
+        if (cache[firstMatrix + secondMatrix]) {
             return cache[firstMatrix + secondMatrix];
         }
 
-        if ( rows < firstMatrix.length ) {       
-            if ( typeof summuryMatrix[rows] === "undefined" ) {
+        if (rows < firstMatrix.length) {       
+            if (typeof summuryMatrix[rows] === "undefined") {
                 summuryMatrix[rows] = [];
             }
     
-            if ( colls < firstMatrix[0].length ) {
+            if (colls < firstMatrix[0].length) {
                 summuryMatrix[rows][colls] = firstMatrix[rows][colls] + secondMatrix[rows][colls];
                 return memorize(firstMatrix, secondMatrix, rows, ++colls, summuryMatrix);
             }
@@ -497,13 +497,13 @@ function deleteRowWithZeroFromMatrix() {
         newMatrix = newMatrix || matrix;
         cache[0] = matrix;
 
-        if ( cache[newMatrix] ) {
+        if (cache[newMatrix]) {
             return cache[matrix];
         }
 
-        if ( rows < matrix.length ) {
-            if ( colls < matrix[0].length ) {
-                if ( matrix[rows][colls] === 0 ) {
+        if (rows < matrix.length) {
+            if (colls < matrix[0].length) {
+                if (matrix[rows][colls] === 0) {
                     matrix.splice(rows, 1);
                     if ( rows !== 0 ) {
                         --rows;
@@ -532,16 +532,16 @@ function deleteCollumnWithZeroFromMatrix() {
         newMatrix = newMatrix || matrix;
         cache[0] = matrix;
 
-        if ( cache[newMatrix] ) {
+        if (cache[newMatrix]) {
             return cache[matrix];
         }
         
-        if ( rows < matrix.length ) {
-            if ( colls < matrix[rows].length ) {
-                if ( matrix[rows][colls] === 0 ) {
+        if (rows < matrix.length) {
+            if (colls < matrix[rows].length) {
+                if (matrix[rows][colls] === 0) {
                     index = matrix[rows].indexOf(matrix[rows][colls]);
     
-                    for ( let i = 0; i < matrix.length; i++) {
+                    for (let i = 0; i < matrix.length; i++) {
                         matrix[i].splice(index, 1);
                     }
                 }
