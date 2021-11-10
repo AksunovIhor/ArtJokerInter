@@ -531,7 +531,7 @@ function deleteCollumnWithZeroFromMatrix() {
         
         if (rows < matrix.length) {
             if (colls < matrix[rows].length) {
-                if (matrix[rows][colls] === 0) {
+                if (compare(matrix[rows][colls])) {
                     index = matrix[rows].indexOf(matrix[rows][colls]);
     
                     for (let i = 0; i < matrix.length; i++) {
