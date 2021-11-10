@@ -455,7 +455,7 @@ function getSumMatrix() {
         summuryMatrix = summuryMatrix || [];
 
         if (firstMatrix.length > secondMatrix.length || secondMatrix.length > firstMatrix.length) {
-            return false;
+            return [0];
         }
 
         if (cache[firstMatrix + secondMatrix]) {
