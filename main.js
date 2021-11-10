@@ -237,10 +237,8 @@ Array.prototype.getSumEllements = function(compare) {
     let sum = 0;
 
     for (let i  = 0; i < this.length; i++) {
-        if (this[i] !== null && this[i] !== undefined) {
-            if ( compare(this[i]) ) {
-                sum += this[i];
-            }
+        if ( compare(this[i]) ) {
+            sum += this[i];
         }
     }
 
@@ -252,10 +250,8 @@ Array.prototype.getQuantityEllements = function(compare) {
     let counter = 0;
 
     for (let i = 0; i < this.length; i++) {
-        if (this[i] !== null && this[i] !== undefined) {
-            if (compare(this[i])) {
-                counter++;
-            }
+        if (compare(this[i])) {
+            counter++;
         }
     }
 
@@ -282,13 +278,11 @@ function convertDecimalToBinnary(number) {
 }
 
 //12) 9-10 задания для двумерных массивов
-
 Array.prototype.getSumEllementsOfMatrix = function(compare) {
     let sum = 0;
+
     for (let i = 0; i < this.length; i++) {
-        if (this[i].length === undefined) {
-            return 0;
-        }
+
         for (let j = 0; j < this[i].length; j++) {  
             if (compare(this[i][j])) {
                 sum += this[i][j];
@@ -298,27 +292,19 @@ Array.prototype.getSumEllementsOfMatrix = function(compare) {
 
     return sum;
 };
-let m = [
-    [1,2,3]
-    [4,5,6]
-    [7,8,9]
-];
-m.getSumEllementsOfMatrix(() => ({}));
 
 Array.prototype.getQuantityEllementsOfMatrix = function(compare) {
     let counter = 0;
 
     for (let i = 0; i < this.length; i++) {
-        if (this[i] !== null && this[i] !== undefined) {
-            for (let j = 0; j < this[i].length; j++) {
-                if (compare(this[i][j])) {
-                    counter++;
-                }
+        for (let j = 0; j < this[i].length; j++) {
+            if (compare(this[i][j])) {
+                counter++;
             }
         }
     }
 
-    return counter;
+    return counter;    
 };
 
 //13) сумма от минимального до максимального значений
@@ -344,28 +330,23 @@ Array.prototype.getAverageValueEllements = function(compare) {
     let counter = 0;
 
     for (let i = 0; i < this.length; i++) {
-        if (this[i] !== null && this[i] !== undefined) {
-            if (compare(this[i])) {
-                sum += this[i];
-                counter++;
-            }
-        }  
+        if (compare(this[i])) {
+            sum += this[i];
+            counter++;
+        }
     }
-
     return sum / counter;
-};
+}; 
 
 Array.prototype.getAverageValueEllementsOfMatrix = function(compare) {
     let sum = 0;
     let counter = 0;
 
     for (let i = 0; i < this.length; i++) {
-        if (this[i] !== null && this[i] !== undefined) {
-            for (let j = 0; j < this[i].length; j++) {
-                if (compare(this[i][j])) {
-                    sum += this[i][j];
-                    counter++;
-                }
+        for (let j = 0; j < this[i].length; j++) {
+            if (compare(this[i][j])) {
+                sum += this[i][j];
+                counter++;
             }
         }
     }
@@ -376,7 +357,8 @@ Array.prototype.getAverageValueEllementsOfMatrix = function(compare) {
 //15) транспортирование матрицы
 function transportationMatrix(matrix) {
     let transposeMatrix = [];
-    for (let i = 0; i < matrix.length; i++) {
+
+    for (let i = 0; i < matrix[0].length; i++) {
         transposeMatrix[i] = [];
         
         for (let j = 0; j < matrix.length; j++) {
@@ -386,127 +368,54 @@ function transportationMatrix(matrix) {
 
     return transposeMatrix;
 }
-let m = [
-    [1,2,3,4],
-    [5,6,7,8],
-    [9,10,11,12]
-];
-transportationMatrix(m);
 
 //16 суммирование матриц
 function getSumMatrix(firstMatrix, secondMatrix) {
-
+    let summuryMatrix = [];
     let rows = firstMatrix.length;
     let collumns = firstMatrix[0].length;
-    let summuryMatrix = [];
 
     if ( firstMatrix.length > secondMatrix.length || secondMatrix.length > firstMatrix.length ) {
-        return false;
+        return [0];
     }
-    
+
     for ( let i = 0; i < rows; i++ ) {
         summuryMatrix[i] = [];
-
+    
         for ( let j = 0; j < collumns; j++ ) {
             summuryMatrix[i][j] = firstMatrix[i][j] + secondMatrix[i][j];
         }
     }
-    
     return summuryMatrix;
 }
 
 //17) удаление строки если в ней есть нулевой элемент
 function deleteRowWithZeroFromMatrix(matrix, compare) {
     for (let i = 0; i < matrix.length; i++) {
-        if (matrix[i] !== null && matrix[i] !== undefined) {
-            for (let j in matrix[i]) {
-                if (compare(j)) {
-                    matrix.splice(i, 1);
-                    i--;
-                }
+        for (let j of matrix[i]) {
+            if(compare(j)) {
+                matrix.splice(i, 1);
+                --i
             }
         }
     }
+
     return matrix;
 }
-let ff = [
-    [1,2,3,4,5]
-    [1,2,3,0,5]
-    [1,2,3,4,5]
-    
-];
-deleteRowWithZeroFromMatrix(ff, (elem) => (elem === 0));
+
 //удаление столбца, если есть нулевой элемент
-function deleteCollumnWithZeroFromMatrix(matrix) {
-    if (matrix.length === undefined && matrix.length + 1 === undefined) {
-        return 0;
-    }
+function deleteCollumnWithZeroFromMatrix(matrix, compare) {
     for (let i = 0; i < matrix.length; i++) {
-        if (matrix[i] !== null && matrix[i] !== undefined) {
-            for (let j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] === 0) {
-                   let index = matrix[i].indexOf(matrix[i][j]);
-    
-                   for (let k = 0; k < matrix.length; k++) {
-                       matrix[k].splice(index, 1);
-                   }
-                }
+        for (let j = 0; j < matrix[i].length; j++) {
+            if (compare(matrix[i][j])) {
+               let index = matrix[i].indexOf(matrix[i][j]);
+
+               for (let k = 0; k < matrix.length; k++) {
+                   matrix[k].splice(index, 1);
+               }
             }
         }
-        return 0;
     }
 
     return matrix;
 }
-
-function f(matrix) {
-    let transposeMatrix = [];
-    for (let i = 0; i < matrix[0].length; i++) {
-        if (matrix[0] === undefined) {
-            return [];
-        }
-        transposeMatrix[i] = [];
-
-        for (let j = 0; j < matrix.length; j++) {
-            transposeMatrix[i][j] = matrix[j][i];
-        }
-    }
-
-    return transposeMatrix;
-    
-}
-let ff = [
-    [1,2,3,4,5],
-    [1,2,3,0,5]
-    [1,2,3,4,5]
-];
-f(ff);
-
-function transponentMatrix(matrix) {
-    let result = [];
-    /*for (let i = 0; i < matrix[0].length; i++) {
-        result[i] = [];
-    }*/
-    if (matrix !== undefined) {
-        for (let i = 0; i < matrix[0].length; i++) {
-            result[i] = [];
-            for (let j = 0; j < matrix.length; j++) {
-                result[i][j] = matrix[j][i];
-            }
-        }
-    }
-    
-    return result;
-}
-
-function fer(matrix) {
-    if (matrix[matrix.length - 1] === undefined) {
-        console.log(0);
-    }
-}
-let ff = [
-    [1,2,3,4,5]
-    [1,2,3,0,5]
-    [1,2,3,4,5]
-];
-fer(ff);

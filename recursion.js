@@ -7,15 +7,15 @@ function isAnagram(firstWord, secondWord, counter1, counter2, firsWordArray, sec
     firsWordArray = firsWordArray || firstWord.toLowerCase().split('');
     secondWordArray = secondWordArray || secondWord.toLowerCase().split('');
 
-    if ( firsWordArray.length !== secondWordArray.length ) {
+    if (firsWordArray.length !== secondWordArray.length) {
         return false;
     }
 
-    if ( firsWordArray.toString() === secondWordArray.toString() ) {
+    if (firsWordArray.toString() === secondWordArray.toString()) {
         return true;
     } else {
-        if ( firsWordArray[counter1] === secondWordArray[counter2] ) {
-            if ( counter1 > firsWordArray.length ) {
+        if (firsWordArray[counter1] === secondWordArray[counter2]) {
+            if (counter1 > firsWordArray.length) {
                 return false;
             }
 
@@ -38,7 +38,7 @@ function isAnagram(firstWord, secondWord, counter1, counter2, firsWordArray, sec
 function creatDigitsArray(number) {
     let numeralsArray = [];
 
-    while ( number ) {
+    while (number) {
         let numeral = number % 10;
         number = (number - numeral) / 10;
         numeralsArray.unshift(numeral);
@@ -52,8 +52,8 @@ function getCountDigits(number, counter, result, digitsArray) {
     digitsArray = digitsArray || creatDigitsArray(number);
     result = result || {};
 
-    if ( counter < digitsArray.length ) {
-        if ( result[digitsArray[counter]] ) {
+    if (counter < digitsArray.length) {
+        if (result[digitsArray[counter]]) {
             result[digitsArray[counter]]++;
         }
         else{
@@ -72,15 +72,15 @@ function findQuantitytUniqWords(string, wordsArray, counter, uniqWordsCounter) {
     uniqWordsCounter = uniqWordsCounter || 0;
     counter = counter || 0;
 
-    if ( counter < wordsArray.length ) {
-        for ( let word of wordsArray ) {
-            for ( let word2 of wordsArray ) {
+    if (counter < wordsArray.length) {
+        for (let word of wordsArray) {
+            for (let word2 of wordsArray) {
                 if ( word === word2 ) {
                     ++counter;
                 }
             }
     
-            if ( counter === 1 ) {
+            if (counter === 1) {
                 ++uniqWordsCounter;
             }
     
@@ -97,7 +97,7 @@ function getQuantityAllWords(string, uniqWordsObject, counter) {
     counter = counter || 0;
     uniqWordsObject = uniqWordsObject || {};
 
-    if ( counter < wordsArray.length ) {
+    if (counter < wordsArray.length) {
         uniqWordsObject[wordsArray[counter]] = ++uniqWordsObject[wordsArray[counter]] || 1;
         return getQuantityAllWords(string, uniqWordsObject, ++counter);
     }
@@ -107,7 +107,7 @@ function getQuantityAllWords(string, uniqWordsObject, counter) {
 
 //6) числа фибоначи +
 function getFibonacciNumbers(amountNumbers) {
-    if ( amountNumbers <= 2 ) {
+    if (amountNumbers <= 2) {
         return [0, 1].splice(0, amountNumbers);
     }
 
@@ -134,8 +134,8 @@ function getSumEllementsOfArray(array, compare, index, sum) {
     sum = sum || 0;
     index = index || 0;
 
-    if ( index < array.length ) {
-        if( compare(array[index]) ){
+    if (index < array.length) {
+        if(compare(array[index])){
             sum += array[index];
         }
 
@@ -150,8 +150,8 @@ function getQuantityEllementsOfArray(array, compare, index, counter) {
     counter = counter || 0;
     index = index || 0;
 
-    if ( index < array.length ) {
-        if ( compare(array[index]) ) {
+    if (index < array.length) {
+        if (compare(array[index])) {
             ++counter;
         }
         return getQuantityEllementsOfArray(array, compare, ++index, counter);
@@ -172,7 +172,7 @@ function convertDecimalToBinnary(number, strBit) {
 
     let reverseString = "";
 
-    for ( let i = strBit.length - 2; i >= 0; i-- ) {
+    for (let i = strBit.length - 2; i >= 0; i--) {
         reverseString += strBit.charAt(i);
     }
 
@@ -186,8 +186,8 @@ function getSumEllementsOfMatrix(matrix, compare, rows, colls, sum) {
     sum = sum || 0;
 
     if (rows < matrix.length ) {
-        if (colls < matrix[rows].length ) {
-            if ( compare(matrix[rows][colls]) ) {
+        if (colls < matrix[rows].length) {
+            if (compare(matrix[rows][colls])) {
                 sum += matrix[rows][colls];
             }
             return getSumEllementsOfMatrix(matrix, compare, rows, ++colls, sum);
@@ -206,7 +206,7 @@ function getQuantityEllementsOfMatrix(matrix, compare, rows, colls, counter) {
 
     if (rows < matrix.length ) {
         if (colls < matrix[rows].length ) {
-            if ( compare(matrix[rows][colls]) ) {
+            if (compare(matrix[rows][colls])) {
                 ++counter;
             }
             return getQuantityEllementsOfMatrix(matrix, compare, rows, ++colls, counter);
@@ -223,12 +223,12 @@ function getSumEllementsInRange(minNumber, maxNumber, compare, sum, index){
     sum = sum || 0;
     index = index || minNumber;
 
-    if ( minNumber >= maxNumber ) {
+    if (minNumber >= maxNumber) {
         return false;
     }
     
-    if ( index <= maxNumber ) {
-        if ( compare(index) ) {
+    if (index <= maxNumber) {
+        if (compare(index)) {
             sum += index;
         }
         return getSumEllementsInRange(minNumber, maxNumber, compare, sum, ++index);
@@ -243,8 +243,8 @@ function getAverageValueEllementsOfArray(array, compare, sum, counter, index) {
     counter = counter || 0;
     index = index || 0;
     
-    if ( index < array.length ) {
-        if ( compare(array[index]) ) {
+    if (index < array.length) {
+        if (compare(array[index])) {
             sum += array[index];
             ++counter;
         }
@@ -260,9 +260,9 @@ function getAverageValueEllementsOfMatrix(matrix, compare, sum, counter, rows, c
     rows = rows || 0;
     colls = colls || 0;
     
-    if ( rows < matrix.length ) {
-        if ( colls < matrix[rows].length ) {
-            if ( compare(matrix[rows][colls]) ) {
+    if (rows < matrix.length) {
+        if (colls < matrix[rows].length) {
+            if (compare(matrix[rows][colls])) {
                 sum += matrix[rows][colls];
                 ++counter;
             }
@@ -281,12 +281,12 @@ function transportationMatrix(matrix, rows, colls, transposeMatrix){
     colls = colls || 0;
     transposeMatrix = transposeMatrix || [];
 
-    if ( rows < matrix.length ) {       
-        if ( typeof transposeMatrix[rows] === "undefined" ) {
+    if (rows < matrix[0].length) {       
+        if (typeof transposeMatrix[rows] === "undefined") {
             transposeMatrix[rows] = [];
         }
 
-        if ( colls < matrix.length ) {
+        if (colls < matrix.length) {
             transposeMatrix[rows][colls] = matrix[colls][rows];
             return transportationMatrix(matrix, rows, ++colls, transposeMatrix);
         }
@@ -303,16 +303,16 @@ function getSumMatrix(firstMatrix, secondMatrix, rows, colls, summuryMatrix){
     colls = colls || 0;
     summuryMatrix = summuryMatrix || [];
 
-    if ( firstMatrix.length > secondMatrix.length || secondMatrix.length > firstMatrix.length ) {
+    if (firstMatrix.length > secondMatrix.length || secondMatrix.length > firstMatrix.length) {
         return false;
     }
 
-    if ( rows < firstMatrix.length ) {       
-        if ( typeof summuryMatrix[rows] === "undefined" ) {
+    if (rows < firstMatrix.length) {       
+        if (typeof summuryMatrix[rows] === "undefined") {
             summuryMatrix[rows] = [];
         }
 
-        if ( colls < firstMatrix[0].length ) {
+        if (colls < firstMatrix[0].length) {
             summuryMatrix[rows][colls] = firstMatrix[rows][colls] + secondMatrix[rows][colls];
             return getSumMatrix(firstMatrix, secondMatrix, rows, ++colls, summuryMatrix);
         }
@@ -324,47 +324,47 @@ function getSumMatrix(firstMatrix, secondMatrix, rows, colls, summuryMatrix){
 }
 
 //17) удаление строки если в ней есть нулевой элемент +
-function deleteRowWithZeroFromMatrix(matrix, rows, colls){
+function deleteRowWithZeroFromMatrix(matrix, compare, rows, colls){
     rows = rows || 0;
     colls = colls || 0;
 
-    if ( rows < matrix.length ) {
-        if ( colls < matrix[0].length ) {
-            if ( matrix[rows][colls] === 0 ) {
+    if (rows < matrix.length) {
+        if (colls < matrix[0].length) {
+            if (compare(matrix[rows][colls])) {
                 matrix.splice(rows, 1);
                 if ( rows !== 0 ) {
                     --rows;
                 }
-                return deleteRowWithZeroFromMatrix(matrix, rows, colls);
+                return deleteRowWithZeroFromMatrix(matrix, compare, rows, colls);
             }
-            return deleteRowWithZeroFromMatrix(matrix, rows, ++colls);
+            return deleteRowWithZeroFromMatrix(matrix, compare, rows, ++colls);
         }
         colls = 0;
-        return deleteRowWithZeroFromMatrix(matrix, ++rows, colls);
+        return deleteRowWithZeroFromMatrix(matrix, compare, ++rows, colls);
     }
 
     return matrix;
 }
 
 //удаление столбца, если есть нулевой элемент +
-function deleteCollumnWithZeroFromMatrix(matrix, rows, colls, index) {
+function deleteCollumnWithZeroFromMatrix(matrix, compare, rows, colls, index) {
     rows = rows || 0;
     colls = colls || 0;
     index = index || 0;
 
-    if ( rows < matrix.length ) {
-        if ( colls < matrix[rows].length ) {
-            if ( matrix[rows][colls] === 0 ) {
+    if (rows < matrix.length) {
+        if (colls < matrix[rows].length) {
+            if (compare(matrix[rows][colls])) {
                 index = matrix[rows].indexOf(matrix[rows][colls]);
 
-                for ( let i = 0; i < matrix.length; i++) {
+                for (let i = 0; i < matrix.length; i++) {
                     matrix[i].splice(index, 1);
                 }
             }
-            return deleteCollumnWithZeroFromMatrix(matrix, rows, ++colls, index);
+            return deleteCollumnWithZeroFromMatrix(matrix, compare, rows, ++colls, index);
         }
         colls = 0;
-        return deleteCollumnWithZeroFromMatrix(matrix, ++rows, colls, index);
+        return deleteCollumnWithZeroFromMatrix(matrix, compare, ++rows, colls, index);
     }
 
     return matrix;

@@ -145,7 +145,7 @@ function getQuantityAllWords() {
     };
 }
 
-//6) числа фибоначи -
+//6) числа фибоначи +
 function getFibonacciNumbers() {
     let cache = [];
 
@@ -383,13 +383,6 @@ function getAverageValueEllementsOfArray() {
         return cache[array + compare];
     };
 }
-let ff = [
-    [1,2,3,4,5]
-    [1,2,3,4,5]
-    [1,2,3,4,5]
-];
-let g = getAverageValueEllementsOfArray();
-g(ff);
 
 function getAverageValueEllementsOfMatrix() {
     let cache = {};
@@ -434,7 +427,7 @@ function transportationMatrix() {
             return cache[matrix];
         }
 
-        if (rows < matrix.length) {       
+        if (rows < matrix[0].length) {       
             if (typeof transposeMatrix[rows] === "undefined") {
                 transposeMatrix[rows] = [];
             }
@@ -482,7 +475,7 @@ function getSumMatrix() {
             return memorize(firstMatrix, secondMatrix, ++rows, colls, summuryMatrix);
         }
         cache[firstMatrix + secondMatrix] = summuryMatrix;
-        console.log(cache);
+
         return cache[firstMatrix + secondMatrix];
     };
 }
@@ -491,7 +484,7 @@ function getSumMatrix() {
 function deleteRowWithZeroFromMatrix() {
     let cache = {};
 
-    return function memorize(matrix, rows, colls, newMatrix) {
+    return function memorize(matrix, compare, rows, colls, newMatrix) {
         rows = rows || 0;
         colls = colls || 0;
         newMatrix = newMatrix || matrix;
@@ -503,17 +496,17 @@ function deleteRowWithZeroFromMatrix() {
 
         if (rows < matrix.length) {
             if (colls < matrix[0].length) {
-                if (matrix[rows][colls] === 0) {
+                if (compare(matrix[rows][colls])) {
                     matrix.splice(rows, 1);
-                    if ( rows !== 0 ) {
+                    if (rows !== 0) {
                         --rows;
                     }
-                    return memorize(matrix, rows, colls, newMatrix);
+                    return memorize(matrix, compare, rows, colls, newMatrix);
                 }
-                return memorize(matrix, rows, ++colls, newMatrix);
+                return memorize(matrix, compare, rows, ++colls, newMatrix);
             }
             colls = 0;
-            return memorize(matrix, ++rows, colls, newMatrix);
+            return memorize(matrix, compare, ++rows, colls, newMatrix);
         }
         cache[newMatrix] = matrix;
 
@@ -525,7 +518,7 @@ function deleteRowWithZeroFromMatrix() {
 function deleteCollumnWithZeroFromMatrix() {
     let cache = {};
 
-    return function memorize(matrix, rows, colls, index, newMatrix) {
+    return function memorize(matrix, compare, rows, colls, index, newMatrix) {
         rows = rows || 0;
         colls = colls || 0;
         index = index || 0;
@@ -545,10 +538,10 @@ function deleteCollumnWithZeroFromMatrix() {
                         matrix[i].splice(index, 1);
                     }
                 }
-                return memorize(matrix, rows, ++colls, index, newMatrix);
+                return memorize(matrix, compare, rows, ++colls, index, newMatrix);
             }
             colls = 0;
-            return memorize(matrix, ++rows, colls, index, newMatrix);
+            return memorize(matrix, compare, ++rows, colls, index, newMatrix);
         }
         cache[newMatrix] = matrix;
 
