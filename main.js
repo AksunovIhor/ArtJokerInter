@@ -43,7 +43,12 @@ const isAnagramES6Standart = (firstWord, secondWord) => [...firstWord.toLowerCas
 //3) количество цифр в числе 
 function creatDigitsArray(number) {
     let digitsArray = [];
+    try { 
 
+    }
+    catch () {
+        
+    }
     if (typeof number !== 'number') {
         throw ("Value must be a number");
     }
